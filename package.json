@@ -1,0 +1,23 @@
+{
+  "name": "fretboard_oop_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thomaspantioras/fretboard_oop_js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Thomaspantioras/fretboard_oop_js/issues"
+  },
+  "homepage": "https://github.com/Thomaspantioras/fretboard_oop_js#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.5"
+  }
+}
