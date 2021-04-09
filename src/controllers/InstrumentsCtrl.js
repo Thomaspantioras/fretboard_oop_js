@@ -8,10 +8,10 @@ const InstrumentsCtrl = (function () {
 
   const getInstrumentsNames = () => {
     return Object.keys(instrumentTuningPreset);
-  },
+  };
   return {
     getInstrumentsNames: () => {
-      getInstrumentsNames();
+      return getInstrumentsNames();
     },
     // getInstrumentsNames: function () {
     //   getInstrumentsNames();

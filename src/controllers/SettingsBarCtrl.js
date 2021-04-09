@@ -1,22 +1,70 @@
+import SettingsBar from '../classes/settingsBar';
+
+// const {
+//   dropdownSelector,
+//   accidentalSelector,
+//   numberOfFretsSelector,
+//   showAllNotesSelector,
+//   showMultipleNotesSelector,
+// } = UICtrl.getSettingsBarSelectors;
+
 const SettingsBarCtrl = (function () {
-  // // TODO name it setup and getMenuSettings, or generate extra method
-  // const getMenuSettings = function (UISelectors) {
-  //   const dropdownSelector = new Dropdown(UISelectors.instrument);
-  //   const instrumentOptions = InstrumentsCtrl.getInstruments();
-  //   dropdownSelector.setupOptions(instrumentOptions);
-  //   const accidentalSelector = new RadioButtons(UISelectors.accidental);
-  //   const numberOfFretsSelector = new NumberInput(UISelectors.numberOfFrets);
-  //   const showAllNotesSelector = new Checkbox(UISelectors.showAllNotes);
-  //   const showMultipleNotesSelector = new Checkbox(
-  //     UISelectors.showMultipleNotes
-  //   );
-  //   return {
-  //     dropdownSelector,
-  //     accidentalSelector,
-  //     numberOfFretsSelector,
-  //     showAllNotesSelector,
-  //     showMultipleNotesSelector,
-  //   };
+  const init = (
+    instrumentSelector,
+    accidentalSelector,
+    numberOfFretsSelector,
+    showAllNotesSelector,
+    showMultipleNotesSelector
+  ) => {
+    return new SettingsBar(
+      instrumentSelector,
+      accidentalSelector,
+      numberOfFretsSelector,
+      showAllNotesSelector,
+      showMultipleNotesSelector
+    );
+  };
+
+  const getElements = (selectors) => {
+    const {
+      instrumentSelector,
+      accidentalSelector,
+      numberOfFretsSelector,
+      showAllNotesSelector,
+      showMultipleNotesSelector,
+    } = selectors;
+
+    return init(
+      instrumentSelector,
+      accidentalSelector,
+      numberOfFretsSelector,
+      showAllNotesSelector,
+      showMultipleNotesSelector
+    ).getSettingsBarElements();
+  };
+
+  // const setupSettings = function (
+  //   instrumentSelector,
+  //   accidentalSelector,
+  //   numberOfFretsSelector,
+  //   showAllNotesSelector,
+  //   showMultipleNotesSelector
+  // ) {
+  // const dropdownSelector = new Dropdown(
+  //   instrumentSelector,
+  //   InstrumentsCtrl.getInstrumentsNames()
+  // );
+  // const accidentalSelector = new RadioButtons(accidentalSelector);
+  // const numberOfFretsSelector = new NumberInput(numberOfFretsSelector);
+  // const showAllNotesSelector = new Checkbox(showAllNotesSelector);
+  // const showMultipleNotesSelector = new Checkbox(showMultipleNotesSelector);
+  // return {
+  //   dropdownSelector,
+  //   accidentalSelector,
+  //   numberOfFretsSelector,
+  //   showAllNotesSelector,
+  //   showMultipleNotesSelector,
+  // };
   // };
   // const instantiateAndGetMenu = function (settings) {
   //   const {
@@ -42,14 +90,22 @@ const SettingsBarCtrl = (function () {
   //   checkboxACallback,
   //   checkboxBCallback,
   // }) {};
-  // return {
-  //   getMenuSettings: function (uiSelectors) {
-  //     return getMenuSettings(uiSelectors);
-  //   },
-  //   instantiateAndGetMenu: function (settings) {
-  //     return instantiateAndGetMenu(settings);
-  //   },
-  // };
+  return {
+    getElements: function (selectors) {
+      return getElements(selectors);
+    },
+    //   setupAndGetSettingsValues: function (uiSelectors) {
+    //     return setupAndGetSettingsValues(uiSelectors);
+    //   },
+    //   instantiateAndGetMenu: function (settings) {
+    //     return instantiateAndGetMenu(settings);
+    //   },
+  };
 })();
+// dropdownSelector,
+// accidentalSelector,
+// numberOfFretsSelector,
+// showAllNotesSelector,
+// showMultipleNotesSelector
 
 export { SettingsBarCtrl };

@@ -1,3 +1,5 @@
+import { UICtrl } from './UICtrl';
+
 const AppCtrl = (function () {
   // Load UI components
   const loadUIComponents = function () {
@@ -7,6 +9,7 @@ const AppCtrl = (function () {
   return {
     init: function () {
       loadUIComponents();
+      UICtrl.settingsBar();
     },
   };
 })();

@@ -2,8 +2,9 @@ export default class Dropdown {
   constructor(uiSelector, options) {
     this.uiSelector = uiSelector;
     this.options = options;
-    this.setupOptions = function () {
+    this.setupOptions = () => {
       let selectElement = document.querySelector(this.uiSelector);
+
       const createOptionElement = (content) => {
         const optionElement = document.createElement('option');
         if (content) {
@@ -13,7 +14,7 @@ export default class Dropdown {
       };
 
       for (let option of this.options) {
-        let optionElement = Dropdown.createOptionElement(option);
+        let optionElement = createOptionElement(option);
         selectElement.appendChild(optionElement);
       }
     };
