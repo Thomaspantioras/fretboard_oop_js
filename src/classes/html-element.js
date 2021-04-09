@@ -9,7 +9,7 @@ export default class Element {
   }
 
   static getElementById(id) {
-    return document.querySelector(`#${id}`);
+    return document.querySelector(`${id}`);
   }
   static getElementByClassName(className) {
     return document.querySelector(`.${className}`);
@@ -24,12 +24,13 @@ export default class Element {
   }
 
   getElement() {
+    console.log(this.elementId);
     return this.elementId
       ? Element.getElementById(this.elementId)
       : Element.getElementByClassName(this.className);
   }
   getValue() {
-    return this.getElement().hasAttribute("value")
+    return this.getElement().hasAttribute('value')
       ? this.getElement().value
       : event.target.value; // this does not work for the dropdown
   }

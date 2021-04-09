@@ -4,16 +4,20 @@ const UICtrl = (function () {
   const UISelectors = {
     settingsBar: {
       instrumentSelector: '#instrument-selector',
-      accidentalSelector: '.accidental-selector',
+      accidentalSelector: '#accidental-selector',
       numberOfFretsSelector: '#number-of-frets',
       showAllNotesSelector: '#show-all-notes',
-      showMultipleNotesSelector: '#show-multiple-note',
+      showMultipleNotesSelector: '#show-multiple-notes',
     },
     // fretboard: ".fretboard",
     // noteNameSection: ".note-name-section",
   };
 
-  const settingsBar = () => {
+  // const addEventListenerCallbacks = {
+
+  // }
+
+  const instantiateSettingsBar = () => {
     return SettingsBarCtrl.getElements(UISelectors.settingsBar);
   };
 
@@ -26,8 +30,8 @@ const UICtrl = (function () {
 
   //public methods
   return {
-    settingsBar: function () {
-      settingsBar(
+    instantiateSettingsBar: function () {
+      instantiateSettingsBar(
         UISelectors.settingsBar.instrument,
         UISelectors.settingsBar.accidental,
         UISelectors.settingsBar.numberOfFrets,
@@ -35,9 +39,9 @@ const UICtrl = (function () {
         UISelectors.settingsBar.showMultipleNotes
       );
     },
-    getSettingsBarSelectors: function () {
-      return UISelectors.settingsBar;
-    },
+    // getSettingsBarSelectors: function () {
+    //   return UISelectors.settingsBar;
+    // },
     // setupFretboard: function () {
     //   FretboardCtrl.setupFretboard(UISelectors.fretboard);
     // },

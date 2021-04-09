@@ -1,30 +1,6 @@
 import SettingsBar from '../classes/settingsBar';
 
-// const {
-//   dropdownSelector,
-//   accidentalSelector,
-//   numberOfFretsSelector,
-//   showAllNotesSelector,
-//   showMultipleNotesSelector,
-// } = UICtrl.getSettingsBarSelectors;
-
 const SettingsBarCtrl = (function () {
-  const init = (
-    instrumentSelector,
-    accidentalSelector,
-    numberOfFretsSelector,
-    showAllNotesSelector,
-    showMultipleNotesSelector
-  ) => {
-    return new SettingsBar(
-      instrumentSelector,
-      accidentalSelector,
-      numberOfFretsSelector,
-      showAllNotesSelector,
-      showMultipleNotesSelector
-    );
-  };
-
   const getElements = (selectors) => {
     const {
       instrumentSelector,
@@ -34,62 +10,60 @@ const SettingsBarCtrl = (function () {
       showMultipleNotesSelector,
     } = selectors;
 
-    return init(
+    const settingsBar = new SettingsBar(
       instrumentSelector,
       accidentalSelector,
       numberOfFretsSelector,
       showAllNotesSelector,
       showMultipleNotesSelector
-    ).getSettingsBarElements();
+    );
+
+    settingsBar.addEventListeners({
+      dropdownCallback: (event) => {
+        console.log(event.target.value);
+        // let selectedInstrument = event.target.value;
+        // let numberOfStrings =
+        //   Instrument.instrumentTuningPreset[selectedInstrument].length;
+        // this.instrument.fretboard.setNumberOfStrings(numberOfStrings);
+        // this.instrument.fretboard.setupFretboard();
+      },
+      radioButtonsCallback: (event) => {
+        console.log(event.target.value);
+        // let accidentals;
+        // if (event.target.classList.contains("acc-select")) {
+        //   accidentals = UI.accidentalSelector.getValue();
+        //   this.instrument.fretboard.setAccidentals(accidentals);
+        //   this.instrument.fretboard.setupFretboard();
+        //   this.instrument.fretboard.setupNoteNameSection();
+        // } else {
+        //   return;
+        // }
+      },
+      numberInputCallback: (event) => {
+        console.log(event.target.value);
+        // this.instrument.fretboard.setNumberOfFrets(event.target.value);
+        // this.instrument.fretboard.setupFretboard();
+      },
+      checkboxACallback: (event) => {
+        console.log(event.target.value);
+        // let showAllNotes = UI.showAllNotesSelector.isChecked();
+        // console.log(showAllNotes);
+        // if (showAllNotes) {
+        //   root.style.setProperty("--noteDotOpacity", 1);
+        //   this.instrument.fretboard.setupFretboard();
+        // } else {
+        //   root.style.setProperty("--noteDotOpacity", 0);
+        //   this.instrument.fretboard.setupFretboard();
+        // }
+      },
+      checkboxBCallback: (event) => {
+        console.log(event.target.value);
+        // let showMultipleNotes = UI.showMultipleNotesSelector.isChecked();
+      },
+    });
+    return settingsBar.getSettingsBarElements();
   };
 
-  // const setupSettings = function (
-  //   instrumentSelector,
-  //   accidentalSelector,
-  //   numberOfFretsSelector,
-  //   showAllNotesSelector,
-  //   showMultipleNotesSelector
-  // ) {
-  // const dropdownSelector = new Dropdown(
-  //   instrumentSelector,
-  //   InstrumentsCtrl.getInstrumentsNames()
-  // );
-  // const accidentalSelector = new RadioButtons(accidentalSelector);
-  // const numberOfFretsSelector = new NumberInput(numberOfFretsSelector);
-  // const showAllNotesSelector = new Checkbox(showAllNotesSelector);
-  // const showMultipleNotesSelector = new Checkbox(showMultipleNotesSelector);
-  // return {
-  //   dropdownSelector,
-  //   accidentalSelector,
-  //   numberOfFretsSelector,
-  //   showAllNotesSelector,
-  //   showMultipleNotesSelector,
-  // };
-  // };
-  // const instantiateAndGetMenu = function (settings) {
-  //   const {
-  //     dropdownSelector,
-  //     accidentalSelector,
-  //     numberOfFretsSelector,
-  //     showAllNotesSelector,
-  //     showMultipleNotesSelector,
-  //   } = settings;
-  //   const menu = new Menu();
-  //   menu.dropdown = dropdownSelector;
-  //   menu.radioButtons = accidentalSelector;
-  //   menu.numberInput = numberOfFretsSelector;
-  //   menu.checkboxA = showAllNotesSelector;
-  //   menu.checkboxB = showMultipleNotesSelector;
-  //   console.log("menu: ", menu);
-  //   return menu;
-  // };
-  // const addEventListeners = function ({
-  //   dropdownCallback,
-  //   radioButtonsCallback,
-  //   numberInputCallback,
-  //   checkboxACallback,
-  //   checkboxBCallback,
-  // }) {};
   return {
     getElements: function (selectors) {
       return getElements(selectors);
@@ -102,10 +76,5 @@ const SettingsBarCtrl = (function () {
     //   },
   };
 })();
-// dropdownSelector,
-// accidentalSelector,
-// numberOfFretsSelector,
-// showAllNotesSelector,
-// showMultipleNotesSelector
 
 export { SettingsBarCtrl };
