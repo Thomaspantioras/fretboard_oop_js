@@ -1,3 +1,6 @@
+import { SettingsBarCtrl } from './SettingsBarCtrl';
+import Instrument from '../classes/instrument';
+
 const InstrumentCtrl = (function () {
   const instrumentsNames = [
     'Guitar',
@@ -13,14 +16,26 @@ const InstrumentCtrl = (function () {
     Ukelele: [7, 4, 0, 7],
   };
 
+  const getInstrument = (instrumentName) => {
+    const fretboard = 'new Fretboard()';
+    const instrument = new Instrument(
+      instrumentName,
+      instrumentTuningPreset[instrument],
+      fretboard
+    );
+  };
+
+  const getNumberOfStrings = (instrument) => {
+    return instrumentTuningPreset[instrument].length;
+  };
+
   return {
     getInstrumentsNames: () => {
       return instrumentsNames;
     },
-    // getInstrumentsNames: () => {
-    //   return getInstrumentsNames();
-    // },
-
+    getNumberOfStrings: (instrument) => {
+      return getNumberOfStrings(instrument);
+    },
     // getInstrumentTuning: function (instrument) {
     //   return instrumentTuningPreset[instrument];
     // },

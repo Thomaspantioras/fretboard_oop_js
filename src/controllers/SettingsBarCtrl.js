@@ -35,9 +35,10 @@ const SettingsBarCtrl = (function () {
     settingsBar.addEventListeners({
       dropdownCallback: (event) => {
         let selectedInstrument = event.target.value;
-        console.log(event.target.value);
-        // let numberOfStrings =
-        //   Instrument.instrumentTuningPreset[selectedInstrument].length;
+        let numberOfStrings = InstrumentCtrl.getNumberOfStrings(
+          selectedInstrument
+        );
+        console.log(numberOfStrings);
         // this.instrument.fretboard.setNumberOfStrings(numberOfStrings);
         // this.instrument.fretboard.setupFretboard();
       },
