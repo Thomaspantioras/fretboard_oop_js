@@ -9,16 +9,15 @@ const InstrumentsCtrl = (function () {
   const getInstrumentsNames = () => {
     return Object.keys(instrumentTuningPreset);
   };
+
   return {
     getInstrumentsNames: () => {
       return getInstrumentsNames();
     },
-    // getInstrumentsNames: function () {
-    //   getInstrumentsNames();
+
+    // getInstrumentTuning: function (instrument) {
+    //   return instrumentTuningPreset[instrument];
     // },
-    getInstrumentTuning: function (instrument) {
-      return instrumentTuningPreset[instrument];
-    },
   };
 })();
 
