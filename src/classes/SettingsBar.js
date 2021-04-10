@@ -1,25 +1,16 @@
-import Dropdown from './dropdown';
-import RadioButtons from './radio-buttons';
-import NumberInput from './number-input';
-import Checkbox from './checkbox';
-import { InstrumentsCtrl } from '../controllers/InstrumentsCtrl';
-
 export default class SettingsBar {
   constructor(
-    instrumentSelector,
-    accidentalSelector,
-    numberOfFretsSelector,
-    showAllNotesSelector,
-    showMultipleNotesSelector
+    instrumentElement,
+    accidentalElement,
+    numberOfFretsElement,
+    showAllNotesElement,
+    showMultipleNotesElement
   ) {
-    this.instrument = new Dropdown(
-      instrumentSelector,
-      InstrumentsCtrl.getInstrumentsNames()
-    );
-    this.accidental = new RadioButtons(accidentalSelector);
-    this.numberOfFrets = new NumberInput(numberOfFretsSelector);
-    this.showAllNotes = new Checkbox(showAllNotesSelector);
-    this.showMultipleNotes = new Checkbox(showMultipleNotesSelector);
+    this.instrument = instrumentElement;
+    this.accidental = accidentalElement;
+    this.numberOfFrets = numberOfFretsElement;
+    this.showAllNotes = showAllNotesElement;
+    this.showMultipleNotes = showMultipleNotesElement;
   }
 
   addEventListeners = ({

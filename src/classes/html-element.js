@@ -12,7 +12,7 @@ export default class Element {
     return document.querySelector(`${id}`);
   }
   static getElementByClassName(className) {
-    return document.querySelector(`.${className}`);
+    return document.querySelector(`${className}`);
   }
 
   static createChildElement(element, content) {
@@ -24,7 +24,6 @@ export default class Element {
   }
 
   getElement() {
-    console.log(this.elementId);
     return this.elementId
       ? Element.getElementById(this.elementId)
       : Element.getElementByClassName(this.className);

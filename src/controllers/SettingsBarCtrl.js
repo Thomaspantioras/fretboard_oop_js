@@ -1,4 +1,9 @@
 import SettingsBar from '../classes/settingsBar';
+import Dropdown from '../classes/dropdown';
+import RadioButtons from '../classes/radio-buttons';
+import NumberInput from '../classes/number-input';
+import Checkbox from '../classes/checkbox';
+import { InstrumentCtrl } from './InstrumentCtrl';
 
 const SettingsBarCtrl = (function () {
   const getElements = (selectors) => {
@@ -10,18 +15,27 @@ const SettingsBarCtrl = (function () {
       showMultipleNotesSelector,
     } = selectors;
 
-    const settingsBar = new SettingsBar(
+    const instrumentElement = new Dropdown(
       instrumentSelector,
-      accidentalSelector,
-      numberOfFretsSelector,
-      showAllNotesSelector,
-      showMultipleNotesSelector
+      InstrumentCtrl.getInstrumentsNames()
+    );
+    const accidentalElement = new RadioButtons(accidentalSelector);
+    const numberOfFretsElement = new NumberInput(numberOfFretsSelector);
+    const showAllNotesElement = new Checkbox(showAllNotesSelector);
+    const showMultipleNotesElement = new Checkbox(showMultipleNotesSelector);
+
+    const settingsBar = new SettingsBar(
+      instrumentElement,
+      accidentalElement,
+      numberOfFretsElement,
+      showAllNotesElement,
+      showMultipleNotesElement
     );
 
     settingsBar.addEventListeners({
       dropdownCallback: (event) => {
+        let selectedInstrument = event.target.value;
         console.log(event.target.value);
-        // let selectedInstrument = event.target.value;
         // let numberOfStrings =
         //   Instrument.instrumentTuningPreset[selectedInstrument].length;
         // this.instrument.fretboard.setNumberOfStrings(numberOfStrings);
