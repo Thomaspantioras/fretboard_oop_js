@@ -1,4 +1,5 @@
-import { SettingsBarCtrl } from './SettingsBarCtrl';
+// import { SettingsBarCtrl } from './SettingsBarCtrl';
+import { FretboardCtrl } from './FretboardCtrl';
 import Instrument from '../classes/instrument';
 
 const InstrumentCtrl = (function () {
@@ -16,6 +17,11 @@ const InstrumentCtrl = (function () {
     Ukelele: [7, 4, 0, 7],
   };
 
+  const setupInstrument = () => {
+    // FretboardCtrl.setupFretboard
+  };
+
+  //=========================
   const getInstrument = (instrumentName) => {
     const fretboard = 'new Fretboard()';
     const instrument = new Instrument(
@@ -25,6 +31,7 @@ const InstrumentCtrl = (function () {
     );
   };
 
+  // temporary solution, should take the value from fretboard
   const getNumberOfStrings = (instrument) => {
     return instrumentTuningPreset[instrument].length;
   };

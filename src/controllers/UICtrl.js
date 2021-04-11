@@ -18,9 +18,13 @@ const UICtrl = (function () {
   // }
 
   const instantiateSettingsBar = () => {
+    SettingsBarCtrl.getUiSelectors(UISelectors.settingsBar);
     return SettingsBarCtrl.getElements(UISelectors.settingsBar);
   };
 
+  const instantiateInstrument = () => {
+    console.log('Hi!!: ', SettingsBarCtrl);
+  };
   // const instantiateAndGetMenu = function (settings) {
   //   return SettingsBarCtrl.instantiateAndGetMenu(settings);
   // };
@@ -38,6 +42,9 @@ const UICtrl = (function () {
         UISelectors.settingsBar.showAllNotes,
         UISelectors.settingsBar.showMultipleNotes
       );
+    },
+    instantiateInstrument: () => {
+      instantiateInstrument();
     },
     // getSettingsBarSelectors: function () {
     //   return UISelectors.settingsBar;

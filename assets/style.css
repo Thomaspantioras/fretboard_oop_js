@@ -44,7 +44,7 @@ label {
   margin: 0 10px;
 }
 
-.fretboard {
+#fretboard {
   display: flex;
   flex-direction: column;
   background: #be975b url(./images/wood-pattern.png);

@@ -6,6 +6,46 @@ import Checkbox from '../classes/checkbox';
 import { InstrumentCtrl } from './InstrumentCtrl';
 
 const SettingsBarCtrl = (function () {
+  const getUiSelectors = ({
+    instrumentSelector,
+    accidentalSelector,
+    numberOfFretsSelector,
+    showAllNotesSelector,
+    showMultipleNotesSelector,
+  }) => {
+    console.log({
+      instrumentSelector,
+      accidentalSelector,
+      numberOfFretsSelector,
+      showAllNotesSelector,
+      showMultipleNotesSelector,
+    });
+    return {
+      instrumentSelector,
+      accidentalSelector,
+      numberOfFretsSelector,
+      showAllNotesSelector,
+      showMultipleNotesSelector,
+    };
+  };
+
+  const getCurrentDropdownValue = (dropdownUiSelector) => {
+    return document.getElementById(dropdownUiSelector).value;
+  };
+
+  const init = () => {
+    const instrumentName = getCurrentDropdownValue();
+
+    const instrumentNumberOfStrings = getNumberOfStrings();
+    const accidental = getCurrentAccidentalValue();
+    const instrumentNumberOfFrets = getCurrentNumberOfFrets();
+    const isShownAllNotes = getCurrentShowAllNotesValue();
+    const isShownMultipleNotes = getCurrentShowMultipleNotesValue();
+
+    const instrument = new Instrument(instrumentName);
+  };
+
+  //=========================
   const getElements = (selectors) => {
     const {
       instrumentSelector,
@@ -80,6 +120,9 @@ const SettingsBarCtrl = (function () {
   };
 
   return {
+    getUiSelectors: (selectors) => {
+      getUiSelectors(selectors);
+    },
     getElements: function (selectors) {
       return getElements(selectors);
     },
