@@ -18,7 +18,7 @@ const SettingsBarCtrl = (function () {
     const selectedInstrument = new Dropdown();
     selectedInstrument.uiSelector = instrumentSelector;
     selectedInstrument.options = InstrumentCtrl.getInstrumentsNames();
-    selectedInstrument.setupOptions(instrumentSelector);
+    selectedInstrument.setupOptions();
     const accidental = new RadioButtons();
     accidental.uiSelector = accidentalSelector;
     const numberOfFrets = new NumberInput();
@@ -28,11 +28,6 @@ const SettingsBarCtrl = (function () {
     const showMultipleNotes = new Checkbox();
     showMultipleNotes.uiSelector = showMultipleNotesSelector;
 
-    console.log(selectedInstrument);
-    console.log(accidental);
-    console.log(numberOfFrets);
-    console.log(showAllNotes);
-    console.log(showMultipleNotes);
     return {
       selectedInstrument,
       accidental,
@@ -42,28 +37,49 @@ const SettingsBarCtrl = (function () {
     };
   };
 
-  const getUiSelectors = ({
-    instrumentSelector,
-    accidentalSelector,
-    numberOfFretsSelector,
-    showAllNotesSelector,
-    showMultipleNotesSelector,
-  }) => {
-    // console.log(instrumentElement);
-    return {
-      instrumentSelector,
-      accidentalSelector,
-      numberOfFretsSelector,
-      showAllNotesSelector,
-      showMultipleNotesSelector,
-    };
-  };
+  // const getUiSelectors = ({
+  //   instrumentSelector,
+  //   accidentalSelector,
+  //   numberOfFretsSelector,
+  //   showAllNotesSelector,
+  //   showMultipleNotesSelector,
+  // }) => {
+  //   return {
+  //     instrumentSelector,
+  //     accidentalSelector,
+  //     numberOfFretsSelector,
+  //     showAllNotesSelector,
+  //     showMultipleNotesSelector,
+  //   };
+  // };
 
   const getCurrentDropdownValue = (dropdownUiSelector) => {
-    // return document.getElementById(dropdownUiSelector).value;
+    return document.getElementById(dropdownUiSelector).value;
   };
 
-  const init = () => {
+  const init = (uiSelectors) => {
+    const {
+      selectedInstrument,
+      accidental,
+      numberOfFrets,
+      showAllNotes,
+      showMultipleNotes,
+    } = createSettingsBarObjects(uiSelectors);
+
+    console.log(selectedInstrument);
+    console.log(accidental);
+    console.log(numberOfFrets);
+    console.log(showAllNotes);
+    console.log(showMultipleNotes);
+
+    const settingsBar = new SettingsBar();
+    settingsBar.instrumentDropdown = selectedInstrument;
+    settingsBar.accidentalRadioButtons = accidental;
+    settingsBar.numberOfFretsInput = numberOfFrets;
+    settingsBar.showAllNotesCheckbox = showAllNotes;
+    settingsBar.showMultipleNotesCheckbox = showMultipleNotes;
+
+    console.log(settingsBar.getSettingsValues());
     // const instrumentElement = new Dropdown2(
     //   instrumentSelector,
     //   InstrumentCtrl.getInstrumentsNames()
@@ -152,9 +168,14 @@ const SettingsBarCtrl = (function () {
   // };
 
   return {
-    getUiSelectors: (selectors) => {
-      getUiSelectors(selectors);
-      createSettingsBarObjects(getUiSelectors(selectors));
+    // getUiSelectors: (selectors) => {
+    //   getUiSelectors(selectors);
+    // },
+    // createSettingsBarObjects: (selectors) => {
+    //   createSettingsBarObjects(selectors);
+    // },
+    init: (selectors) => {
+      init(selectors);
     },
     // getElements: function (selectors) {
     //   return getElements(selectors);

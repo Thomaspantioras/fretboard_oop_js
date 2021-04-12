@@ -18,7 +18,9 @@ const UICtrl = (function () {
   // }
 
   const instantiateSettingsBar = () => {
-    SettingsBarCtrl.getUiSelectors(UISelectors.settingsBar);
+    // SettingsBarCtrl.getUiSelectors(UISelectors.settingsBar);
+    // SettingsBarCtrl.createSettingsBarObjects(UISelectors.settingsBar);
+    SettingsBarCtrl.init(UISelectors.settingsBar);
     // return SettingsBarCtrl.getElements(UISelectors.settingsBar);
   };
 

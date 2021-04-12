@@ -4,7 +4,6 @@ export default class Dropdown extends Element {
   constructor() {
     super();
     this._options = [];
-    // this.setupOptions(this._options);
   }
 
   get options() {
@@ -15,12 +14,11 @@ export default class Dropdown extends Element {
     this._options = value;
   }
 
-  setupOptions = (uiSelector) => {
-    console.log(super.getElementByUiSelector(uiSelector));
-    // let selectElement = Element.getElementByUiSelector();
-    // for (let option of this._options) {
-    //   let optionElement = Element.createChildElement('option', option);
-    //   selectElement.appendChild(optionElement);
-    // }
+  setupOptions = () => {
+    let selectElement = this.getElementByUiSelector(this.uiSelector);
+    for (let option of this._options) {
+      let optionElement = this.createChildElement('option', option);
+      selectElement.appendChild(optionElement);
+    }
   };
 }

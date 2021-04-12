@@ -4,8 +4,8 @@ export default class Checkbox extends Element {
   constructor() {
     super();
   }
-
-  isChecked() {
-    return this.getElement().checked;
+  //override
+  getValue(uiSelector) {
+    return this.getElementByUiSelector(uiSelector).checked;
   }
 }
