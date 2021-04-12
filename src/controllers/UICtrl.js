@@ -19,7 +19,7 @@ const UICtrl = (function () {
 
   const instantiateSettingsBar = () => {
     SettingsBarCtrl.getUiSelectors(UISelectors.settingsBar);
-    return SettingsBarCtrl.getElements(UISelectors.settingsBar);
+    // return SettingsBarCtrl.getElements(UISelectors.settingsBar);
   };
 
   const instantiateInstrument = () => {

@@ -1,4 +1,5 @@
-export default class Fretboard extends Element {
+import Element2 from './html-element2';
+export default class Fretboard extends Element2 {
   static singleFretMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
   static doubleFretMarkPositions = [12, 24];
 

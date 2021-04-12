@@ -1,8 +1,8 @@
-import Element from './html-element.js';
+import Element from './html-element';
 
 export default class Checkbox extends Element {
-  constructor(elementId, className) {
-    super(elementId, className);
+  constructor() {
+    super();
   }
 
   isChecked() {

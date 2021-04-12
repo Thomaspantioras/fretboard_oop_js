@@ -1,13 +1,7 @@
-import Element from './html-element.js';
+import Element from './html-element';
 
 export default class RadioButtons extends Element {
-  constructor(elementId, className) {
-    super(elementId, className);
+  constructor() {
+    super();
   }
 }
-
-// export default class RadioButtons {
-//   constructor(uiSelector) {
-//     this.uiSelector = uiSelector;
-//   }
-// }

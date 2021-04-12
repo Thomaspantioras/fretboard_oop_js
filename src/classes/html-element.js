@@ -1,19 +1,7 @@
 export default class Element {
-  constructor(elementId, className) {
-    if (arguments.length > 1) {
-      this.elementId = elementId;
-      this.className = className;
-    } else {
-      this.elementId = elementId;
-    }
-  }
-
-  static getElementById(id) {
-    return document.querySelector(`${id}`);
-  }
-  static getElementByClassName(className) {
-    return document.querySelector(`${className}`);
-  }
+  // static getElementByUiSelector(selector) {
+  //   return document.querySelector(`${selector}`);
+  // }
 
   static createChildElement(element, content) {
     element = document.createElement(element);
@@ -23,10 +11,26 @@ export default class Element {
     return element;
   }
 
+  constructor() {
+    this._uiSelector = '';
+  }
+
+  get uiSelector() {
+    if (this._uiSelector) return this._uiSelector;
+    return;
+  }
+  set uiSelector(value) {
+    this._uiSelector = value;
+  }
+
+  static getElementByUiSelector(uiSelector) {
+    console.log('hi898 ', uiSelector);
+    // console.log('hi: ', document.querySelector(this._uiSelector));
+    // return document.querySelector(this._uiSelector);
+  }
+
   getElement() {
-    return this.elementId
-      ? Element.getElementById(this.elementId)
-      : Element.getElementByClassName(this.className);
+    return this._uiSelector ? getElementByUiSelector(this._uiSelector) : null;
   }
   getValue() {
     return this.getElement().hasAttribute('value')

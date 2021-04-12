@@ -19,6 +19,7 @@ const InstrumentCtrl = (function () {
 
   const setupInstrument = () => {
     // FretboardCtrl.setupFretboard
+    // const instrument = new Instrument()
   };
 
   //=========================
