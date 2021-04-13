@@ -9,10 +9,10 @@ const AppCtrl = (function () {
   return {
     init: function () {
       loadUIComponents();
-      console.log('SettingBarObject: ', UICtrl.getSettingBarObject());
-      // UICtrl.getSettingBarObject();
-      // UICtrl.instantiateInstrument();
-      console.log('InstrumentObject: ', UICtrl.getInstrument());
+      // console.log('SettingBarObject: ', UICtrl.getSettingBarObject());
+      // console.log('InstrumentObject: ', UICtrl.getInstrument());
+      UICtrl.getSettingBarObject();
+      UICtrl.getInstrument();
     },
   };
 })();

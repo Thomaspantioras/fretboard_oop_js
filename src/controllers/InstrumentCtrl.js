@@ -34,7 +34,7 @@ const InstrumentCtrl = (function () {
     instrument.tuning = instrumentTuningPreset[selectedInstrument];
     instrument.currentSettings = instrumentSettings; //TODO not sure that is needed
     const numberOfStrings = instrumentTuningPreset[selectedInstrument].length;
-    const fretboard = FretboardCtrl.createFretboardObject(
+    instrument.fretboard = FretboardCtrl.createFretboardObject(
       fretboardSelector,
       chosenAccidental,
       definedNumberOfFrets,
@@ -43,9 +43,7 @@ const InstrumentCtrl = (function () {
       isShownMultipleNotesNotes,
       instrument.tuning
     );
-    // const fretboard = new Fretboard();
-    console.log('fretboardSelector : ', fretboardSelector);
-    console.log('fretboard obj: ', fretboard);
+
     return instrument;
   };
 

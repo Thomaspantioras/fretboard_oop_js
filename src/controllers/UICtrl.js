@@ -25,8 +25,6 @@ const UICtrl = (function () {
 
   const getInstrument = () => {
     const instrumentSettings = getSettingBarObject().currentValues;
-    // console.log('instsumentSettings: ', instrumentSettings);
-    console.log('UISelectors: ', UISelectors.instrument);
     return InstrumentCtrl.createInstrumentObject(
       UISelectors.instrument,
       instrumentSettings
