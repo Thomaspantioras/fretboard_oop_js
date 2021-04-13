@@ -46,20 +46,14 @@ const SettingsBarCtrl = (function () {
       showMultipleNotes,
     } = createSettingsBarObjects(uiSelectors);
 
-    console.log(selectedInstrument);
-    console.log(accidental);
-    console.log(numberOfFrets);
-    console.log(showAllNotes);
-    console.log(showMultipleNotes);
-
     const settingsBar = new SettingsBar();
     settingsBar.instrumentDropdown = selectedInstrument;
     settingsBar.accidentalRadioButtons = accidental;
     settingsBar.numberOfFretsInput = numberOfFrets;
     settingsBar.showAllNotesCheckbox = showAllNotes;
     settingsBar.showMultipleNotesCheckbox = showMultipleNotes;
-
-    console.log(settingsBar.getSettingsValues());
+    settingsBar.currentValues = settingsBar.getSettingsValues();
+    return settingsBar;
   };
 
   //=========================
@@ -144,7 +138,7 @@ const SettingsBarCtrl = (function () {
     //   createSettingsBarObjects(selectors);
     // },
     getSettingBarObject: (selectors) => {
-      getSettingBarObject(selectors);
+      return getSettingBarObject(selectors);
     },
     // getElements: function (selectors) {
     //   return getElements(selectors);

@@ -19,6 +19,14 @@ const InstrumentCtrl = (function () {
   //   // FretboardCtrl.setupFretboard
   //   // const instrument = new Instrument()
   // };
+
+  const createInstrumentObject = (UiSelectors) => {
+    const { fretboardSelector } = UiSelectors;
+    const instrument = new Instrument();
+    // const fretboard = new Fretboard();
+    return 'Instrument';
+  };
+
   // // //=========================
   // // const getInstrument = (instrumentName) => {
   // //   const fretboard = 'new Fretboard()';
@@ -35,6 +43,9 @@ const InstrumentCtrl = (function () {
   return {
     getInstrumentsNames: () => {
       return instrumentsNames;
+    },
+    createInstrumentObject: (UiSelectors) => {
+      return createInstrumentObject(UiSelectors);
     },
     // getNumberOfStrings: (instrument) => {
     //   return getNumberOfStrings(instrument);

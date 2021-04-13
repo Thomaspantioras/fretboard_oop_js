@@ -1,3 +1,4 @@
+import { InstrumentCtrl } from './InstrumentCtrl';
 import { SettingsBarCtrl } from './SettingsBarCtrl';
 
 const UICtrl = (function () {
@@ -9,7 +10,9 @@ const UICtrl = (function () {
       showAllNotesSelector: '#show-all-notes',
       showMultipleNotesSelector: '#show-multiple-notes',
     },
-    // fretboard: ".fretboard",
+    instrument: {
+      fretboard: '#fretboard',
+    },
     // noteNameSection: ".note-name-section",
   };
 
@@ -17,9 +20,11 @@ const UICtrl = (function () {
 
   // }
 
-  const createSettingsBar = () => {
+  const getSettingBarObject = () =>
     SettingsBarCtrl.getSettingBarObject(UISelectors.settingsBar);
-    // return SettingsBarCtrl.getElements(UISelectors.settingsBar);
+
+  const getInstrument = () => {
+    return InstrumentCtrl.createInstrumentObject(UISelectors.instrument);
   };
 
   // const instantiateInstrument = () => {
@@ -34,14 +39,20 @@ const UICtrl = (function () {
 
   //public methods
   return {
-    createSettingsBar: function () {
-      createSettingsBar(
-        UISelectors.settingsBar.instrument,
-        UISelectors.settingsBar.accidental,
-        UISelectors.settingsBar.numberOfFrets,
-        UISelectors.settingsBar.showAllNotes,
-        UISelectors.settingsBar.showMultipleNotes
-      );
+    // createSettingsBar: function () {
+    //   createSettingsBar(
+    //     UISelectors.settingsBar.instrument,
+    //     UISelectors.settingsBar.accidental,
+    //     UISelectors.settingsBar.numberOfFrets,
+    //     UISelectors.settingsBar.showAllNotes,
+    //     UISelectors.settingsBar.showMultipleNotes
+    //   );
+    // },
+    getSettingBarObject: () => {
+      return getSettingBarObject();
+    },
+    getInstrument: () => {
+      return getInstrument();
     },
     // instantiateInstrument: () => {
     //   instantiateInstrument();

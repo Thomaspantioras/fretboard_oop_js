@@ -43,6 +43,7 @@ export default class SettingsBar {
     this._numberOfFretsInput = class {};
     this._showAllNotesCheckbox = class {};
     this._showMultipleNotesCheckbox = class {};
+    this._currentValues = {};
   }
 
   get instrumentDropdown() {
@@ -80,6 +81,13 @@ export default class SettingsBar {
   set showMultipleNotesCheckbox(value) {
     this._showMultipleNotesCheckbox = value;
   }
+  get currentValues() {
+    if (this._currentValues) return this._currentValues;
+    return;
+  }
+  set currentValues(value) {
+    this._currentValues = value;
+  }
 
   getSettingsValues() {
     const settingsValues = {
@@ -99,8 +107,6 @@ export default class SettingsBar {
         this._showMultipleNotesCheckbox.uiSelector
       ),
     };
-
-    console.log(settingsValues);
     return settingsValues;
   }
 }

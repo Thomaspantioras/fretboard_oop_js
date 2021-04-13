@@ -27,10 +27,6 @@ export default class Element {
   //   return this._uiSelector ? getElementByUiSelector(this._uiSelector) : null;
   // }
   getValue(uiSelector) {
-    console.log(uiSelector);
-    console.log(this.getElementByUiSelector(uiSelector));
-    console.log(this.getElementByUiSelector(uiSelector).value);
-
     // return this.getElementByUiSelector(uiSelector).hasAttribute('value')
     //   ? this.getElementByUiSelector(uiSelector).value
     //   : event.target.value; // this does not work for the dropdown
