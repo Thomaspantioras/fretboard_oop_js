@@ -17,16 +17,14 @@ const UICtrl = (function () {
 
   // }
 
-  const instantiateSettingsBar = () => {
-    // SettingsBarCtrl.getUiSelectors(UISelectors.settingsBar);
-    // SettingsBarCtrl.createSettingsBarObjects(UISelectors.settingsBar);
-    SettingsBarCtrl.init(UISelectors.settingsBar);
+  const createSettingsBar = () => {
+    SettingsBarCtrl.getSettingBarObject(UISelectors.settingsBar);
     // return SettingsBarCtrl.getElements(UISelectors.settingsBar);
   };
 
-  const instantiateInstrument = () => {
-    console.log('Hi!!: ', SettingsBarCtrl);
-  };
+  // const instantiateInstrument = () => {
+  //   console.log('Hi!!: ', SettingsBarCtrl);
+  // };
   // const instantiateAndGetMenu = function (settings) {
   //   return SettingsBarCtrl.instantiateAndGetMenu(settings);
   // };
@@ -36,8 +34,8 @@ const UICtrl = (function () {
 
   //public methods
   return {
-    instantiateSettingsBar: function () {
-      instantiateSettingsBar(
+    createSettingsBar: function () {
+      createSettingsBar(
         UISelectors.settingsBar.instrument,
         UISelectors.settingsBar.accidental,
         UISelectors.settingsBar.numberOfFrets,
@@ -45,9 +43,9 @@ const UICtrl = (function () {
         UISelectors.settingsBar.showMultipleNotes
       );
     },
-    instantiateInstrument: () => {
-      instantiateInstrument();
-    },
+    // instantiateInstrument: () => {
+    //   instantiateInstrument();
+    // },
     // getSettingsBarSelectors: function () {
     //   return UISelectors.settingsBar;
     // },

@@ -9,7 +9,7 @@ const AppCtrl = (function () {
   return {
     init: function () {
       loadUIComponents();
-      UICtrl.instantiateSettingsBar();
+      UICtrl.createSettingsBar();
       // UICtrl.instantiateInstrument();
     },
   };
