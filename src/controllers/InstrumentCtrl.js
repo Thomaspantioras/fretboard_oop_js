@@ -9,22 +9,44 @@ const InstrumentCtrl = (function () {
     'Bass (5 Strings)',
     'Ukelele',
   ];
-  // const instrumentTuningPreset = {
-  //   Guitar: [4, 11, 7, 2, 9, 4],
-  //   'Bass (4 Strings)': [7, 2, 9, 4],
-  //   'Bass (5 Strings)': [7, 2, 9, 4, 11],
-  //   Ukelele: [7, 4, 0, 7],
-  // };
+  const instrumentTuningPreset = {
+    Guitar: [4, 11, 7, 2, 9, 4],
+    'Bass (4 Strings)': [7, 2, 9, 4],
+    'Bass (5 Strings)': [7, 2, 9, 4, 11],
+    Ukelele: [7, 4, 0, 7],
+  };
   // const setupInstrument = () => {
   //   // FretboardCtrl.setupFretboard
   //   // const instrument = new Instrument()
   // };
 
-  const createInstrumentObject = (UiSelectors) => {
-    const { fretboardSelector } = UiSelectors;
+  const createInstrumentObject = (instrumentUiSelector, instrumentSettings) => {
+    const { fretboardSelector } = instrumentUiSelector;
+    const {
+      selectedInstrument,
+      chosenAccidental,
+      definedNumberOfFrets,
+      isShownAllNotes,
+      isShownMultipleNotesNotes,
+    } = instrumentSettings;
     const instrument = new Instrument();
+    instrument.name = selectedInstrument;
+    instrument.tuning = instrumentTuningPreset[selectedInstrument];
+    instrument.currentSettings = instrumentSettings; //TODO not sure that is needed
+    const numberOfStrings = instrumentTuningPreset[selectedInstrument].length;
+    const fretboard = FretboardCtrl.createFretboardObject(
+      fretboardSelector,
+      chosenAccidental,
+      definedNumberOfFrets,
+      numberOfStrings,
+      isShownAllNotes,
+      isShownMultipleNotesNotes,
+      instrument.tuning
+    );
     // const fretboard = new Fretboard();
-    return 'Instrument';
+    console.log('fretboardSelector : ', fretboardSelector);
+    console.log('fretboard obj: ', fretboard);
+    return instrument;
   };
 
   // // //=========================
@@ -44,8 +66,8 @@ const InstrumentCtrl = (function () {
     getInstrumentsNames: () => {
       return instrumentsNames;
     },
-    createInstrumentObject: (UiSelectors) => {
-      return createInstrumentObject(UiSelectors);
+    createInstrumentObject: (instrumentUiSelector, instrumentSettings) => {
+      return createInstrumentObject(instrumentUiSelector, instrumentSettings);
     },
     // getNumberOfStrings: (instrument) => {
     //   return getNumberOfStrings(instrument);

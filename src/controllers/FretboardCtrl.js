@@ -4,6 +4,34 @@ import { NoteFretCtrl } from './NoteFretCtrl';
 // import { StringCtrl } from "../controllers/StringCtrl.js";
 
 const FretboardCtrl = (function () {
+  const noteFlat = [
+    'C',
+    'Db',
+    'D',
+    'Eb',
+    'E',
+    'F',
+    'Gb',
+    'G',
+    'Ab',
+    'A',
+    'Bb',
+    'B',
+  ];
+  const noteSharp = [
+    'C',
+    'C#',
+    'D',
+    'D#',
+    'E',
+    'F',
+    'F#',
+    'G',
+    'G#',
+    'A',
+    'A#',
+    'B',
+  ];
   // // const root = document.documentElement;
   // const setCssRootVariable = (name, value) => {
   //   const root = document.documentElement;
@@ -14,16 +42,32 @@ const FretboardCtrl = (function () {
   //   element.innerHTML = '';
   //   return element;
   // };
-  // const instantiateFretboard = (fretboardUiSelector) => {
-  //   return new Fretboard(fretboardUiSelector);
-  // };
+  const createFretboardObject = (
+    fretboardSelector,
+    chosenAccidental,
+    definedNumberOfFrets,
+    numberOfStrings,
+    isShownAllNotes,
+    isShownMultipleNotesNotes,
+    instrumentTuning
+  ) => {
+    const fretboard = new Fretboard();
+    fretboard.uiSelector = fretboardSelector;
+    fretboard.numberOfStrings = numberOfStrings;
+    fretboard.numberOfFrets = Number(definedNumberOfFrets);
+    fretboard.notes = chosenAccidental === 'flats' ? noteFlat : noteSharp;
+    fretboard.tuning = instrumentTuning;
+    console.log('fretboard: ', fretboard);
+    return fretboard;
+  };
+
   // const createStringElement = () => {
   //   const stringClassName = 'string';
   //   const stringInstance = new InstrumentString(stringClassName);
   //   return stringInstance.createStringElement();
   // };
   // const setupFretboard = function (fretboardUiSelector) {
-  //   const fretboardInstance = instantiateFretboard(fretboardUiSelector);
+  //   const fretboardInstance = createFretboardObject(fretboardUiSelector);
   //   setCssRootVariable(
   //     '--number-of-strings',
   //     fretboardInstance.numberOfStrings
@@ -47,15 +91,31 @@ const FretboardCtrl = (function () {
   //   }
   // };
   // // //public methods
-  // return {
-  //   //   setupFretboard: function (uiSelector) {
-  //   //     const fretboard = instantiateFretboard(uiSelector);
-  //   //     setupFretboard(fretboard);
-  //   //   },
-  //   setupFretboard: function (uiSelector) {
-  //     setupFretboard(uiSelector);
-  //   },
-  // };
+  return {
+    createFretboardObject: (
+      fretboardSelector,
+      chosenAccidental,
+      definedNumberOfFrets,
+      numberOfStrings,
+      isShownAllNotes,
+      isShownMultipleNotesNotes,
+      instrumentTuning
+    ) => {
+      console.log('instrument.tuning : ', instrumentTuning);
+      return createFretboardObject(
+        fretboardSelector,
+        chosenAccidental,
+        definedNumberOfFrets,
+        numberOfStrings,
+        isShownAllNotes,
+        isShownMultipleNotesNotes,
+        instrumentTuning
+      );
+    },
+    // setupFretboard: function (uiSelector) {
+    //   setupFretboard(uiSelector);
+    // },
+  };
 })();
 
 export { FretboardCtrl };

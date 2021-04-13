@@ -3,6 +3,7 @@ export default class Instrument {
     this._name = '';
     this._tuning = [];
     this._fretboard = class {};
+    this._currentSettings = {};
   }
   //setters and getters
   get name() {
@@ -12,12 +13,12 @@ export default class Instrument {
   set name(value) {
     this._name = value;
   }
-  get tunning() {
-    if (this._tunning) return this._tunning;
+  get tuning() {
+    if (this._tuning) return this._tuning;
     return;
   }
-  set tunning(value) {
-    this._tunning = value;
+  set tuning(value) {
+    this._tuning = value;
   }
   get fretboard() {
     if (this._fretboard) return this._fretboard;
@@ -25,5 +26,12 @@ export default class Instrument {
   }
   set fretboard(value) {
     this._fretboard = value;
+  }
+  get currentSettings() {
+    if (this._currentSettings) return this._currentSettings;
+    return;
+  }
+  set currentSettings(value) {
+    this._currentSettings = value;
   }
 }

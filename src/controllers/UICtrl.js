@@ -11,7 +11,7 @@ const UICtrl = (function () {
       showMultipleNotesSelector: '#show-multiple-notes',
     },
     instrument: {
-      fretboard: '#fretboard',
+      fretboardSelector: '#fretboard',
     },
     // noteNameSection: ".note-name-section",
   };
@@ -24,7 +24,13 @@ const UICtrl = (function () {
     SettingsBarCtrl.getSettingBarObject(UISelectors.settingsBar);
 
   const getInstrument = () => {
-    return InstrumentCtrl.createInstrumentObject(UISelectors.instrument);
+    const instrumentSettings = getSettingBarObject().currentValues;
+    // console.log('instsumentSettings: ', instrumentSettings);
+    console.log('UISelectors: ', UISelectors.instrument);
+    return InstrumentCtrl.createInstrumentObject(
+      UISelectors.instrument,
+      instrumentSettings
+    );
   };
 
   // const instantiateInstrument = () => {
