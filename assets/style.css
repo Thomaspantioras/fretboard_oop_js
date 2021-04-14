@@ -236,7 +236,8 @@ label {
 
 .note-fret::before {
   content: attr(data-note);
-  width: 33px;
+  /* width: 33px; */
+  width: var(--note-fret-width);
   height: 33px;
   border-radius: 50%;
   line-height: 33px;
