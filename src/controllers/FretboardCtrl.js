@@ -32,16 +32,7 @@ const FretboardCtrl = (function () {
     'A#',
     'B',
   ];
-  // // const root = document.documentElement;
-  // const setCssRootVariable = (name, value) => {
-  //   const root = document.documentElement;
-  //   root.style.setProperty(name, value);
-  // };
-  // const getEmptyFretboardHtmlElement = (fretboardUiSelector) => {
-  //   const element = document.querySelector(fretboardUiSelector);
-  //   element.innerHTML = '';
-  //   return element;
-  // };
+
   const createFretboardObject = (
     fretboardSelector,
     chosenAccidental,
@@ -61,35 +52,51 @@ const FretboardCtrl = (function () {
     return fretboard;
   };
 
-  // const createStringElement = () => {
-  //   const stringClassName = 'string';
-  //   const stringInstance = new InstrumentString(stringClassName);
-  //   return stringInstance.createStringElement();
-  // };
-  // const setupFretboard = function (fretboardUiSelector) {
-  //   const fretboardInstance = createFretboardObject(fretboardUiSelector);
-  //   setCssRootVariable(
-  //     '--number-of-strings',
-  //     fretboardInstance.numberOfStrings
-  //   );
-  //   const fretboardHtmlElement = getEmptyFretboardHtmlElement(
-  //     fretboardUiSelector
-  //   );
-  //   for (let i = 0; i < fretboardInstance.numberOfStrings; i++) {
-  //     let string = createStringElement();
-  //     fretboardHtmlElement.appendChild(string);
-  //     for (let fret = 0; fret <= fretboardInstance.numberOfFrets; fret++) {
-  //       let noteFret = NoteFretCtrl.createFretElement();
-  //       string.appendChild(noteFret);
-  //       if (i === 0) NoteFretCtrl.addFretMark(fret, noteFret);
-  //       let noteName = NoteFretCtrl.getFretNoteName(
-  //         fret + fretboardInstance.tuningPresets[i],
-  //         fretboardInstance.accidentals
-  //       );
-  //       noteFret.setAttribute('data-note', noteName);
-  //     }
-  //   }
-  // };
+  // const root = document.documentElement;
+  const setCssRootVariable = (name, value) => {
+    const root = document.documentElement;
+    root.style.setProperty(name, value);
+  };
+  const getEmptyFretboardHtmlElement = (fretboardUiSelector) => {
+    const element = document.querySelector(fretboardUiSelector);
+    element.innerHTML = '';
+    return element;
+  };
+
+  const createStringElement = (className) => {
+    const stringInstance = new InstrumentString();
+    stringInstance.stringClassName = className;
+
+    return stringInstance.createStringElement();
+  };
+
+  const buildFretboard = function (
+    fretboardUiSelector,
+    numberOfStrings,
+    numberOfFrets
+  ) {
+    // const fretboardInstance = createFretboardObject(fretboardUiSelector);
+    setCssRootVariable('--number-of-strings', numberOfStrings);
+    const fretboardHtmlElement = getEmptyFretboardHtmlElement(
+      fretboardUiSelector
+    );
+    for (let i = 0; i < numberOfStrings; i++) {
+      // setCssRootVariable('--string-height', 10 - i);
+      let string = createStringElement(`string${i}`);
+      fretboardHtmlElement.appendChild(string);
+      for (let fret = 0; fret <= numberOfFrets; fret++) {
+        console.log('noteFret');
+        //       let noteFret = NoteFretCtrl.createFretElement();
+        //       string.appendChild(noteFret);
+        //       if (i === 0) NoteFretCtrl.addFretMark(fret, noteFret);
+        //       let noteName = NoteFretCtrl.getFretNoteName(
+        //         fret + fretboardInstance.tuningPresets[i],
+        //         fretboardInstance.accidentals
+        //       );
+        //       noteFret.setAttribute('data-note', noteName);
+      }
+    }
+  };
   // // //public methods
   return {
     createFretboardObject: (
@@ -112,9 +119,9 @@ const FretboardCtrl = (function () {
         instrumentTuning
       );
     },
-    // setupFretboard: function (uiSelector) {
-    //   setupFretboard(uiSelector);
-    // },
+    buildFretboard: function (uiSelector, numberOfStrings, numberOfFrets) {
+      buildFretboard(uiSelector, numberOfStrings, numberOfFrets);
+    },
   };
 })();
 

@@ -12,6 +12,7 @@ const UICtrl = (function () {
     },
     instrument: {
       fretboardSelector: '#fretboard',
+      // string: "string",
     },
     // noteNameSection: ".note-name-section",
   };

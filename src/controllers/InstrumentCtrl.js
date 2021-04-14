@@ -44,6 +44,11 @@ const InstrumentCtrl = (function () {
       instrument.tuning
     );
 
+    FretboardCtrl.buildFretboard(
+      fretboardSelector,
+      numberOfStrings,
+      definedNumberOfFrets
+    );
     return instrument;
   };
 
