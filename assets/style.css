@@ -223,6 +223,7 @@ label {
   justify-content: center;
   align-items: center;
   position: relative;
+  max-width: var(--note-fret-width);
 }
 
 .note-fret:first-child {
@@ -237,7 +238,7 @@ label {
 .note-fret::before {
   content: attr(data-note);
   /* width: 33px; */
-  width: var(--note-fret-width);
+  max-width: var(--note-fret-width);
   height: 33px;
   border-radius: 50%;
   line-height: 33px;
@@ -265,11 +266,13 @@ label {
 }
 .double-fretmark::before {
   top: calc(var(--double-fretmark-position-1) * 1px);
-  transform: translate(-140%, -50%);
+  /* transform: translate(-140%, -50%); */
+  transform: translate(-70%, -50%);
 }
 .double-fretmark::after {
   top: calc(var(--double-fretmark-position-2) * 1px);
-  transform: translate(-140%, -50%);
+  /* transform: translate(-140%, -50%); */
+  transform: translate(-70%, -50%);
 }
 
 .note-name-section {
