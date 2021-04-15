@@ -1,9 +1,9 @@
 import Element from '../classes/html-element';
 
 const NotesSectionCtrl = (function () {
-  const setupNoteSection = (notes) => {
+  const setupNoteSection = (notes, uiSelector) => {
     const notesSection = new Element();
-    notesSection.uiSelector = '.note-name-section';
+    notesSection.uiSelector = uiSelector;
     notesSection.getElementByUiSelector(notesSection.uiSelector).innerHTML = '';
 
     notes.forEach((note) => {
@@ -16,8 +16,8 @@ const NotesSectionCtrl = (function () {
 
   //public methods
   return {
-    setupNoteSection: (notes) => {
-      return setupNoteSection(notes);
+    setupNoteSection: (notes, uiSelector) => {
+      return setupNoteSection(notes, uiSelector);
     },
   };
 })();

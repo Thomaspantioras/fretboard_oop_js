@@ -15,7 +15,7 @@ const UICtrl = (function () {
       fretboardSelector: '#fretboard',
       // string: "string",
     },
-    // noteNameSection: ".note-name-section",
+    noteNameSection: '.note-name-section',
   };
 
   // const addEventListenerCallbacks = {
@@ -35,7 +35,7 @@ const UICtrl = (function () {
   };
 
   const setupNoteSection = (notes) => {
-    NotesSectionCtrl.setupNoteSection(notes);
+    NotesSectionCtrl.setupNoteSection(notes, UISelectors.noteNameSection);
   };
   // const instantiateInstrument = () => {
   //   console.log('Hi!!: ', SettingsBarCtrl);
