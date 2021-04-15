@@ -11,9 +11,9 @@ const AppCtrl = (function () {
       loadUIComponents();
       // console.log('SettingBarObject: ', UICtrl.getSettingBarObject());
       // console.log('InstrumentObject: ', UICtrl.getInstrument());
-      UICtrl.getSettingBarObject();
-      const instrument = UICtrl.getInstrument();
-      console.log(instrument.fretboard.notes);
+      const settings = UICtrl.getSettingBarObject();
+      const instrument = UICtrl.getInstrument(settings.currentValues);
+      // console.log(instrument.fretboard.notes);
       UICtrl.setupNoteSection(instrument.fretboard.notes);
     },
   };

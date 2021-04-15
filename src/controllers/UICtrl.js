@@ -25,9 +25,9 @@ const UICtrl = (function () {
   const getSettingBarObject = () =>
     SettingsBarCtrl.getSettingBarObject(UISelectors.settingsBar);
 
-  const getInstrument = () => {
-    const instrumentSettings = getSettingBarObject().currentValues;
-    console.log('instrumentSettings: ', instrumentSettings);
+  const getInstrument = (instrumentSettings) => {
+    // const instrumentSettings = getSettingBarObject().currentValues;
+    // console.log('instrumentSettings: ', instrumentSettings);
     return InstrumentCtrl.createInstrumentObject(
       UISelectors.instrument,
       instrumentSettings
@@ -61,8 +61,8 @@ const UICtrl = (function () {
     getSettingBarObject: () => {
       return getSettingBarObject();
     },
-    getInstrument: () => {
-      return getInstrument();
+    getInstrument: (instrumentSettings) => {
+      return getInstrument(instrumentSettings);
     },
     setupNoteSection: (notes) => {
       return setupNoteSection(notes);
