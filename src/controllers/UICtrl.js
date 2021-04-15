@@ -1,5 +1,6 @@
 import { InstrumentCtrl } from './InstrumentCtrl';
 import { SettingsBarCtrl } from './SettingsBarCtrl';
+import { NotesSectionCtrl } from './NotesSectionCtrl';
 
 const UICtrl = (function () {
   const UISelectors = {
@@ -26,12 +27,16 @@ const UICtrl = (function () {
 
   const getInstrument = () => {
     const instrumentSettings = getSettingBarObject().currentValues;
+    console.log('instrumentSettings: ', instrumentSettings);
     return InstrumentCtrl.createInstrumentObject(
       UISelectors.instrument,
       instrumentSettings
     );
   };
 
+  const setupNoteSection = (notes) => {
+    NotesSectionCtrl.setupNoteSection(notes);
+  };
   // const instantiateInstrument = () => {
   //   console.log('Hi!!: ', SettingsBarCtrl);
   // };
@@ -58,6 +63,9 @@ const UICtrl = (function () {
     },
     getInstrument: () => {
       return getInstrument();
+    },
+    setupNoteSection: (notes) => {
+      return setupNoteSection(notes);
     },
     // instantiateInstrument: () => {
     //   instantiateInstrument();

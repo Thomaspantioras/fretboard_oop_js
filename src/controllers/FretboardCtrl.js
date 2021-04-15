@@ -101,19 +101,11 @@ const FretboardCtrl = (function () {
   // };
 
   const addFretMark = (fretIndex, noteFretObj, noteFretElement) => {
-    if (doubleMarkPositions.indexOf(fretIndex) !== -1) {
-      return noteFretObj.addDoubleMarkOnFret(
-        noteFretElement,
-        'double-fretmark'
-      );
-    }
+    if (doubleMarkPositions.indexOf(fretIndex) !== -1)
+      noteFretObj.addDoubleMarkOnFret(noteFretElement, 'double-fretmark');
 
-    if (singleMarkPositions.indexOf(fretIndex) !== -1) {
-      return noteFretObj.addSingleMarkOnFret(
-        noteFretElement,
-        'single-fretmark'
-      );
-    }
+    if (singleMarkPositions.indexOf(fretIndex) !== -1)
+      noteFretObj.addSingleMarkOnFret(noteFretElement, 'single-fretmark');
   };
 
   // const buildFretboard = function (
@@ -159,7 +151,7 @@ const FretboardCtrl = (function () {
         // let noteFret = createFretElement('note-fret');
         const fretObj = createFretObject('note-fret');
         const noteFret = fretObj.createFretTemplate();
-        noteFret.style.setProperty('--note-fret-width', `${90 - fret * 3}px`);
+        noteFret.style.setProperty('--note-fret-width', `${100 - fret * 3}px`);
         string.appendChild(noteFret);
         if (i === 0) addFretMark(fret, fretObj, noteFret);
 
@@ -169,7 +161,7 @@ const FretboardCtrl = (function () {
       }
     }
   };
-  // // //public methods
+  //public methods
   return {
     createFretboardObject: (
       fretboardSelector,
