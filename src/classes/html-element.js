@@ -33,8 +33,8 @@ export default class Element {
     return this.getElementByUiSelector(uiSelector).value; // this does not work for the dropdown
   }
 
-  // addListener(typeOfEvent, callFunction) {
-  //   const element = this.getElement();
-  //   element.addEventListener(typeOfEvent, callFunction);
-  // }
+  addEventListenerOn(uiSelector, typeOfEvent, callFunction) {
+    const element = this.getElementByUiSelector(uiSelector);
+    element.addEventListener(typeOfEvent, callFunction);
+  }
 }

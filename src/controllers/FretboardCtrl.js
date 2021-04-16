@@ -68,6 +68,8 @@ const FretboardCtrl = (function () {
     fretboard.numberOfFrets = Number(definedNumberOfFrets);
     fretboard.notes = chosenAccidental === 'flats' ? noteFlat : noteSharp;
     fretboard.tuning = instrumentTuning;
+    fretboard.isShownAllNotes = isShownAllNotes;
+    fretboard.isShownMultipleNotesNotes = isShownMultipleNotesNotes;
     return fretboard;
   };
 
@@ -83,6 +85,7 @@ const FretboardCtrl = (function () {
   };
 
   const createStringElement = (className) => {
+    //TODO does it need its controller?
     const stringInstance = new InstrumentString();
     stringInstance.stringClassName = className;
 
@@ -90,15 +93,11 @@ const FretboardCtrl = (function () {
   };
 
   const createFretObject = (className) => {
+    //TODO does it need its controller?
     const noteFretInstance = new NoteFret();
     noteFretInstance.className = className;
     return noteFretInstance;
   };
-  // const createFretElement = (className) => {
-  //   const noteFretInstance = new NoteFret();
-  //   noteFretInstance.className = className;
-  //   return noteFretInstance.createFretTemplate();
-  // };
 
   const addFretMark = (fretIndex, noteFretObj, noteFretElement) => {
     if (doubleMarkPositions.indexOf(fretIndex) !== -1)
@@ -108,37 +107,6 @@ const FretboardCtrl = (function () {
       noteFretObj.addSingleMarkOnFret(noteFretElement, 'single-fretmark');
   };
 
-  // const buildFretboard = function (
-  //   fretboardUiSelector,
-  //   numberOfStrings,
-  //   numberOfFrets
-  // ) {
-  //   setCssRootVariable('--number-of-strings', numberOfStrings);
-  //   const fretboardHtmlElement = getEmptyFretboardHtmlElement(
-  //     fretboardUiSelector
-  //   );
-  //   for (let i = 0; i < numberOfStrings; i++) {
-  //     let string = createStringElement(`string${i}`);
-  //     fretboardHtmlElement.appendChild(string);
-  //     for (let fret = 0; fret <= numberOfFrets; fret++) {
-  //       // let noteFret = createFretElement('note-fret');
-  //       let fretObj = createFretObject('note-fret');
-  //       let noteFret = fretObj.createFretTemplate();
-  //       noteFret.style.setProperty('--note-fret-width', `${70 - fret * 2.5}px`);
-  //       string.appendChild(noteFret);
-  //       if (i === 0) addFretMark(fret, fretObj, noteFret);
-
-  //       // let noteFret = NoteFretCtrl.createFretElement();
-  //       //       string.appendChild(noteFret);
-  //       //       if (i === 0) NoteFretCtrl.addFretMark(fret, noteFret);
-
-  //       //       let noteName = NoteFretCtrl.getFretNoteName(
-  //       //         fret + fretboardInstance.tuningPresets[i],
-  //       //         fretboardInstance.accidentals
-  //       //       );
-  //       //       noteFret.setAttribute('data-note', noteName);
-  //     }
-  //   }
   const buildFretboard = (fretboardObj) => {
     setCssRootVariable('--number-of-strings', fretboardObj.numberOfStrings);
     const fretboardHtmlElement = getEmptyFretboardHtmlElement(
@@ -160,6 +128,42 @@ const FretboardCtrl = (function () {
         noteFret.setAttribute('data-note', noteName);
       }
     }
+
+    setFretboardEventListeners(fretboardObj);
+  };
+
+  const setFretboardEventListeners = (fretboardObj) => {
+    const setNoteDot = (event) => {
+      if (fretboardObj.isShownAllNotes) return;
+
+      if (event.target.classList.contains('note-fret')) {
+        let opacity = event.type === 'mouseover' ? 1 : 0;
+        fretboardObj.isShownMultipleNotesNotes
+          ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
+          : event.target.style.setProperty('--noteDotOpacity', opacity);
+      }
+
+      // if (
+      //   !fretboardObj.isShownAllNotes &&
+      //   event.target.classList.contains('note-fret')
+      // ) {
+      //   let opacity = event.type === 'mouseover' ? 1 : 0;
+      //   fretboardObj.isShownMultipleNotesNotes
+      //     ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
+      //     : event.target.style.setProperty('--noteDotOpacity', opacity);
+      // }
+    };
+
+    fretboardObj.addEventListenerOn(
+      fretboardObj.uiSelector,
+      'mouseover',
+      setNoteDot
+    );
+    fretboardObj.addEventListenerOn(
+      fretboardObj.uiSelector,
+      'mouseout',
+      setNoteDot
+    );
   };
   //public methods
   return {

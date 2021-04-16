@@ -11,6 +11,8 @@ export default class Fretboard extends Element {
     this._numberOfFrets = '';
     this._tuning = [];
     this._notes = [];
+    this.isShownAllNotes = false;
+    this.isShownMultipleNotesNotes = false;
     // this._accidentals = '';
   }
   get numberOfStrings() {
@@ -41,11 +43,27 @@ export default class Fretboard extends Element {
   set notes(notes) {
     this._notes = notes;
   }
-  // get accidentals() {
-  //   if (this._accidentals) return this._accidentals;
-  //   return;
-  // }
-  // set accidentals(accidental) {
-  //   this._accidentals = accidental;
-  // }
+  get isShownAllNotes() {
+    if (this._isShownAllNotes) return this._isShownAllNotes;
+    return;
+  }
+  set isShownAllNotes(boolean) {
+    this._isShownAllNotes = boolean;
+  }
+  get isShownMultipleNotesNotes() {
+    if (this._isShownMultipleNotesNotes) return this._isShownMultipleNotesNotes;
+    return;
+  }
+  set isShownMultipleNotesNotes(boolean) {
+    this._isShownMultipleNotesNotes = boolean;
+  }
+
+  toggleMultipleNotes(noteName, opacity) {
+    const allNotes = document.querySelectorAll('.note-fret');
+    for (let i = 0; i < allNotes.length; i++) {
+      if (allNotes[i].dataset.note === noteName) {
+        allNotes[i].style.setProperty('--noteDotOpacity', opacity);
+      }
+    }
+  }
 }

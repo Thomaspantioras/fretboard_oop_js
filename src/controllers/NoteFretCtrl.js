@@ -1,6 +1,9 @@
 import NoteFret from '../classes/note-fret';
 
 const FretCtrl = (function () {
+  // const addListener = (fretObj) => {
+  //   if (fretObj.)
+  // }
   // const noteFretClassName = 'note-fret'; // does this member belong in NoteFret class?
   // const singleMarkClassName = 'single-fretmark'; // does this member belong in NoteFret class?
   // const singleMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
