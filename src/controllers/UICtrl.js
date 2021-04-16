@@ -34,9 +34,13 @@ const UICtrl = (function () {
     );
   };
 
-  const setupNoteSection = (notes) => {
-    NotesSectionCtrl.setupNoteSection(notes, UISelectors.noteNameSection);
+  const setupNoteSection = (instrument) => {
+    NotesSectionCtrl.setupNoteSection(instrument, UISelectors.noteNameSection);
   };
+  // const setupNoteSection = (notes) => {
+  //   NotesSectionCtrl.setupNoteSection(notes, UISelectors.noteNameSection);
+  // };
+
   // const instantiateInstrument = () => {
   //   console.log('Hi!!: ', SettingsBarCtrl);
   // };
@@ -64,9 +68,12 @@ const UICtrl = (function () {
     getInstrument: (instrumentSettings) => {
       return getInstrument(instrumentSettings);
     },
-    setupNoteSection: (notes) => {
-      return setupNoteSection(notes);
+    setupNoteSection: (instrument) => {
+      return setupNoteSection(instrument);
     },
+    // setupNoteSection: (notes) => {
+    //   return setupNoteSection(notes);
+    // },
     // instantiateInstrument: () => {
     //   instantiateInstrument();
     // },

@@ -23,7 +23,6 @@ export default class NoteFret {
     return noteFret;
   }
   addSingleMarkOnFret = (noteFretEl, singleMarkClassName) => {
-    console.log(noteFretEl);
     noteFretEl.classList.add(singleMarkClassName);
   };
   addDoubleMarkOnFret = (noteFretEl, doubleMarkClassName) => {
