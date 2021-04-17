@@ -38,12 +38,33 @@ const SettingsBarCtrl = (function () {
     };
   };
 
-  const setSettingBarEventListeners = (settingsBar) => {
+  const setNumberOfFretsEventListener = (settingsBar) => {
+    const setNumberOfFrets = () => {
+      settingsBar.currentValues = settingsBar.getSettingsValues();
+      UICtrl.getInstrument(settingsBar.currentValues);
+    };
+    settingsBar.numberOfFretsInput.addEventListenerOn(
+      settingsBar.numberOfFretsInput.uiSelector,
+      'change',
+      setNumberOfFrets
+    );
+  };
+  const setSelectedInstrumentEventListener = (settingsBar) => {
+    const setSelectedInstrument = () => {
+      settingsBar.currentValues = settingsBar.getSettingsValues();
+      UICtrl.getInstrument(settingsBar.currentValues);
+    };
+    settingsBar.instrumentDropdown.addEventListenerOn(
+      settingsBar.instrumentDropdown.uiSelector,
+      'change',
+      setSelectedInstrument
+    );
+  };
+
+  const setAccidentalsEventListener = (settingsBar) => {
     const setAccidentals = (event) => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
-      // let accidentals;
       if (event.target.classList.contains('acc-select')) {
-        // accidentals = settingsBar.currentValues.chosenAccidental;
         const instrument = UICtrl.getInstrument(settingsBar.currentValues);
         UICtrl.setupNoteSection(instrument);
       } else {
@@ -55,6 +76,12 @@ const SettingsBarCtrl = (function () {
       'click',
       setAccidentals
     );
+  };
+
+  const setSettingBarEventListeners = (settingsBar) => {
+    setAccidentalsEventListener(settingsBar);
+    setSelectedInstrumentEventListener(settingsBar);
+    setNumberOfFretsEventListener(settingsBar);
   };
 
   const getSettingBarObject = (uiSelectors) => {
