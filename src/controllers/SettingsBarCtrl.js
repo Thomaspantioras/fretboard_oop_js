@@ -4,6 +4,7 @@ import RadioButtons from '../classes/radio-buttons';
 import NumberInput from '../classes/number-input';
 import Checkbox from '../classes/checkbox';
 import { InstrumentCtrl } from './InstrumentCtrl';
+import { UICtrl } from './UICtrl';
 
 const SettingsBarCtrl = (function () {
   const createSettingsBarObjects = (uiSelectors) => {
@@ -37,6 +38,25 @@ const SettingsBarCtrl = (function () {
     };
   };
 
+  const setSettingBarEventListeners = (settingsBar) => {
+    const setAccidentals = (event) => {
+      settingsBar.currentValues = settingsBar.getSettingsValues();
+      // let accidentals;
+      if (event.target.classList.contains('acc-select')) {
+        // accidentals = settingsBar.currentValues.chosenAccidental;
+        const instrument = UICtrl.getInstrument(settingsBar.currentValues);
+        UICtrl.setupNoteSection(instrument);
+      } else {
+        return;
+      }
+    };
+    settingsBar.accidentalRadioButtons.addEventListenerOn(
+      settingsBar.accidentalRadioButtons.uiSelector,
+      'click',
+      setAccidentals
+    );
+  };
+
   const getSettingBarObject = (uiSelectors) => {
     const {
       selectedInstrument,
@@ -53,6 +73,8 @@ const SettingsBarCtrl = (function () {
     settingsBar.showAllNotesCheckbox = showAllNotes;
     settingsBar.showMultipleNotesCheckbox = showMultipleNotes;
     settingsBar.currentValues = settingsBar.getSettingsValues();
+
+    setSettingBarEventListeners(settingsBar);
     return settingsBar;
   };
 
