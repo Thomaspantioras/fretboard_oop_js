@@ -20,6 +20,7 @@ const NotesSectionCtrl = (function () {
     const setNotesFromNameNoteSection = (event) => {
       // let showAllNotes = UI.showAllNotesSelector.isChecked();
       let isShownAllNotes = instrument.currentSettings.isShownAllNotes;
+      // console.log(isShownAllNotes);
       if (!isShownAllNotes) {
         let note = event.target.innerText;
         let opacity = event.type === 'mouseover' ? 1 : 0;

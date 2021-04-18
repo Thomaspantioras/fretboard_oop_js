@@ -78,10 +78,42 @@ const SettingsBarCtrl = (function () {
     );
   };
 
+  const setShowAllNotesEventListener = (settingsBar) => {
+    const setShowAllNotes = () => {
+      settingsBar.currentValues = settingsBar.getSettingsValues();
+      console.log('settingsBar.currentValues: ', settingsBar.currentValues);
+
+      const isShownAllNotes = settingsBar.currentValues.isShownAllNotes;
+      console.log(
+        'UICtrl.getInstrument: ',
+        UICtrl.getInstrument(settingsBar.currentValues)
+      );
+      UICtrl.getInstrument(settingsBar.currentValues);
+      const root = document.documentElement;
+      // console.log(showAllNotes);
+      if (isShownAllNotes) {
+        root.style.setProperty('--noteDotOpacity', 1);
+        // UICtrl.getInstrument(settingsBar.currentValues);
+        // this.instrument.fretboard.setupFretboard();
+      } else {
+        root.style.setProperty('--noteDotOpacity', 0);
+        // UICtrl.getInstrument(settingsBar.currentValues);
+        // this.instrument.fretboard.setupFretboard();
+      }
+    };
+
+    settingsBar.showAllNotesCheckbox.addEventListenerOn(
+      settingsBar.showAllNotesCheckbox.uiSelector,
+      'change',
+      setShowAllNotes
+    );
+  };
+
   const setSettingBarEventListeners = (settingsBar) => {
     setAccidentalsEventListener(settingsBar);
     setSelectedInstrumentEventListener(settingsBar);
     setNumberOfFretsEventListener(settingsBar);
+    setShowAllNotesEventListener(settingsBar);
   };
 
   const getSettingBarObject = (uiSelectors) => {

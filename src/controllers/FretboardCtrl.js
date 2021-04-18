@@ -3,6 +3,9 @@ import InstrumentString from '../classes/instrument-string';
 import NoteFret from '../classes/note-fret';
 // import { NoteFretCtrl } from './NoteFretCtrl';
 // import { StringCtrl } from "../controllers/StringCtrl.js";
+import { InstrumentCtrl } from './InstrumentCtrl';
+import { UICtrl } from './UICtrl';
+import { SettingsBarCtrl } from './SettingsBarCtrl';
 
 const FretboardCtrl = (function () {
   // const noteFretClassName = 'note-fret'; // does this member belong in NoteFret class?
@@ -134,17 +137,27 @@ const FretboardCtrl = (function () {
 
   const setFretboardEventListeners = (fretboardObj) => {
     const setNoteDot = (event) => {
-      if (fretboardObj.isShownAllNotes) return;
-
-      if (event.target.classList.contains('note-fret')) {
+      // const settings = UICtrl.getSettingBarObject();
+      // const instrument = UICtrl.getInstrument(settings.currentValues);
+      // UICtrl.setupNoteSection(instrument);
+      console.log(fretboardObj);
+      // console.log('isShownAllNotes: ', fretboardObj._isShownAllNotes);
+      if (fretboardObj._isShownAllNotes) return;
+      // if (true) return;
+      // console.log('continue!!', fretboardObj._isShownMultipleNotesNotes);
+      if (
+        !fretboardObj._isShownAllNotes &&
+        event.target.classList.contains('note-fret')
+      ) {
+        console.log('in');
         let opacity = event.type === 'mouseover' ? 1 : 0;
-        fretboardObj.isShownMultipleNotesNotes
+        fretboardObj._isShownMultipleNotesNotes
           ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
           : event.target.style.setProperty('--noteDotOpacity', opacity);
       }
 
       // if (
-      //   !fretboardObj.isShownAllNotes &&
+      //   !fretboardObj._isShownAllNotes &&
       //   event.target.classList.contains('note-fret')
       // ) {
       //   let opacity = event.type === 'mouseover' ? 1 : 0;

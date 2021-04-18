@@ -11,8 +11,8 @@ export default class Fretboard extends Element {
     this._numberOfFrets = '';
     this._tuning = [];
     this._notes = [];
-    this.isShownAllNotes = false;
-    this.isShownMultipleNotesNotes = false;
+    this._isShownAllNotes = '';
+    this._isShownMultipleNotesNotes = '';
     // this._accidentals = '';
   }
   get numberOfStrings() {
@@ -47,15 +47,15 @@ export default class Fretboard extends Element {
     if (this._isShownAllNotes) return this._isShownAllNotes;
     return;
   }
-  set isShownAllNotes(boolean) {
-    this._isShownAllNotes = boolean;
+  set isShownAllNotes(value) {
+    this._isShownAllNotes = value;
   }
   get isShownMultipleNotesNotes() {
     if (this._isShownMultipleNotesNotes) return this._isShownMultipleNotesNotes;
     return;
   }
-  set isShownMultipleNotesNotes(boolean) {
-    this._isShownMultipleNotesNotes = boolean;
+  set isShownMultipleNotesNotes(value) {
+    this._isShownMultipleNotesNotes = value;
   }
 
   toggleMultipleNotes(noteName, opacity) {
