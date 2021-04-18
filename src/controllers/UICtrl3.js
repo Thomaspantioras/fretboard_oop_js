@@ -1,5 +1,6 @@
 import { SettingsBarCtrl } from './SettingsBarCtrl';
 import UI from '../classes/ui';
+import { FretboardCtrl } from './FretboardCtrl';
 
 const UICtrl = (function () {
   const UISelectors = {
@@ -10,7 +11,7 @@ const UICtrl = (function () {
       showAllNotesSelector: '#show-all-notes',
       showMultipleNotesSelector: '#show-multiple-notes',
     },
-    //   fretboardSelector: '#fretboard',
+    fretboardSelector: '#fretboard',
 
     //   // instrument: {
     //   //   fretboardSelector: '#fretboard',
@@ -24,12 +25,13 @@ const UICtrl = (function () {
 
   // Load UI components
   const loadUI = (settingsBar, fretboard, notesSection) => {
-    console.log('Hello!!');
+    // console.log('Hello!!');
     const ui = new UI();
     ui.settingsBar = settingsBar;
-    // ui.fretboard = fretboard;
-    // ui.notesSection = notesSection;
+    ui.fretboard = fretboard;
+    ui.notesSection = notesSection;
     console.log('UI: ', ui);
+    return ui;
   };
 
   const instantiateSettingBarObj = () => {
@@ -43,6 +45,16 @@ const UICtrl = (function () {
   // const getSettingBarObject = () =>
   //   SettingsBarCtrl.getSettingBarObject(UISelectors.settingsBar);
 
+  const instantiateFretboardObject = (currentValues) => {
+    return FretboardCtrl.instantiateFretboardObject(
+      UISelectors.fretboardSelector,
+      currentValues
+    );
+  };
+
+  const buildFretboard = (fretboard) => {
+    FretboardCtrl.buildFretboard(fretboard);
+  };
   // const getInstrument = (instrumentSettings) => {
   //   return InstrumentCtrl.createInstrumentObject(
   //     // UISelectors.instrument,
@@ -62,12 +74,20 @@ const UICtrl = (function () {
   return {
     init: function () {
       const settingsBar = instantiateSettingBarObj();
-      loadUI(settingsBar);
+      const fretboard = instantiateFretboardObject(settingsBar.currentValues);
+      buildFretboard(fretboard);
+      // loadUI(settingsBar, fretboard, 'blb');
       setSettingsBarEventListeners(settingsBar);
 
       // const settings = getSettingBarObject();
       // const instrument = getInstrument(settings.currentValues);
       // setupNoteSection(instrument);
+    },
+    instantiateFretboardObject: (currentValues) => {
+      return instantiateFretboardObject(currentValues);
+    },
+    buildFretboard: (fretboard) => {
+      buildFretboard(fretboard);
     },
     // getSettingBarObject: () => {
     //   return getSettingBarObject();

@@ -12,18 +12,18 @@ export default class UI {
   set settingsBar(value) {
     this._settingsBar = value;
   }
-  get _fretboard() {
-    if (this.__fretboard) return this.__fretboard;
+  get fretboard() {
+    if (this._fretboard) return this._fretboard;
     return;
   }
-  set _fretboard(value) {
-    this.__fretboard = value;
+  set fretboard(value) {
+    this._fretboard = value;
   }
-  get _notesSection() {
-    if (this.__notesSection) return this.__notesSection;
+  get notesSection() {
+    if (this._notesSection) return this._notesSection;
     return;
   }
-  set _notesSection(value) {
-    this.__notesSection = value;
+  set notesSection(value) {
+    this._notesSection = value;
   }
 }

@@ -8,10 +8,13 @@ import { UICtrl } from './UICtrl';
 import { SettingsBarCtrl } from './SettingsBarCtrl';
 
 const FretboardCtrl = (function () {
-  // const noteFretClassName = 'note-fret'; // does this member belong in NoteFret class?
-  // const singleMarkClassName = 'single-fretmark'; // does this member belong in NoteFret class?
+  const instrumentTuningPreset = {
+    Guitar: [4, 11, 7, 2, 9, 4],
+    'Bass (4 Strings)': [7, 2, 9, 4],
+    'Bass (5 Strings)': [7, 2, 9, 4, 11],
+    Ukelele: [7, 4, 0, 7],
+  };
   const singleMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
-  // const doubleMarkClassName = 'double-fretmark'; // does this member belong in NoteFret class?
   const doubleMarkPositions = [12, 24];
   const noteFlat = [
     'C',
@@ -56,15 +59,21 @@ const FretboardCtrl = (function () {
     return notes[noteIndex];
   };
 
-  const createFretboardObject = (
+  const instantiateFretboardObject = (
     fretboardSelector,
-    chosenAccidental,
-    definedNumberOfFrets,
-    numberOfStrings,
-    isShownAllNotes,
-    isShownMultipleNotesNotes,
-    instrumentTuning
+    settingsCurrentValues
   ) => {
+    // console.log(fretboardSelector, settingsCurrentValues);
+    const {
+      selectedInstrument,
+      chosenAccidental,
+      definedNumberOfFrets,
+      isShownAllNotes,
+      isShownMultipleNotesNotes,
+    } = settingsCurrentValues;
+    const instrumentTuning = instrumentTuningPreset[selectedInstrument];
+    const numberOfStrings = instrumentTuningPreset[selectedInstrument].length;
+
     const fretboard = new Fretboard();
     fretboard.uiSelector = fretboardSelector;
     fretboard.numberOfStrings = numberOfStrings;
@@ -73,8 +82,29 @@ const FretboardCtrl = (function () {
     fretboard.tuning = instrumentTuning;
     fretboard.isShownAllNotes = isShownAllNotes;
     fretboard.isShownMultipleNotesNotes = isShownMultipleNotesNotes;
+
     return fretboard;
   };
+
+  // const createFretboardObject = (
+  //   fretboardSelector,
+  //   chosenAccidental,
+  //   definedNumberOfFrets,
+  //   numberOfStrings,
+  //   isShownAllNotes,
+  //   isShownMultipleNotesNotes,
+  //   instrumentTuning
+  // ) => {
+  //   const fretboard = new Fretboard();
+  //   fretboard.uiSelector = fretboardSelector;
+  //   fretboard.numberOfStrings = numberOfStrings;
+  //   fretboard.numberOfFrets = Number(definedNumberOfFrets);
+  //   fretboard.notes = chosenAccidental === 'flats' ? noteFlat : noteSharp;
+  //   fretboard.tuning = instrumentTuning;
+  //   fretboard.isShownAllNotes = isShownAllNotes;
+  //   fretboard.isShownMultipleNotesNotes = isShownMultipleNotesNotes;
+  //   return fretboard;
+  // };
 
   // const root = document.documentElement;
   const setCssRootVariable = (name, value) => {
@@ -111,6 +141,7 @@ const FretboardCtrl = (function () {
   };
 
   const buildFretboard = (fretboardObj) => {
+    // console.log('HERE: ', fretboardObj);
     setCssRootVariable('--number-of-strings', fretboardObj.numberOfStrings);
     const fretboardHtmlElement = getEmptyFretboardHtmlElement(
       fretboardObj.uiSelector
@@ -132,76 +163,86 @@ const FretboardCtrl = (function () {
       }
     }
 
-    setFretboardEventListeners(fretboardObj);
+    //   setFretboardEventListeners(fretboardObj);
   };
 
-  const setFretboardEventListeners = (fretboardObj) => {
-    const setNoteDot = (event) => {
-      // const settings = UICtrl.getSettingBarObject();
-      // const instrument = UICtrl.getInstrument(settings.currentValues);
-      // UICtrl.setupNoteSection(instrument);
-      console.log(fretboardObj);
-      // console.log('isShownAllNotes: ', fretboardObj._isShownAllNotes);
-      if (fretboardObj._isShownAllNotes) return;
-      // if (true) return;
-      // console.log('continue!!', fretboardObj._isShownMultipleNotesNotes);
-      if (
-        !fretboardObj._isShownAllNotes &&
-        event.target.classList.contains('note-fret')
-      ) {
-        console.log('in');
-        let opacity = event.type === 'mouseover' ? 1 : 0;
-        fretboardObj._isShownMultipleNotesNotes
-          ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
-          : event.target.style.setProperty('--noteDotOpacity', opacity);
-      }
+  // const setFretboardEventListeners = (fretboardObj) => {
+  //   const setNoteDot = (event) => {
+  //     // const settings = UICtrl.getSettingBarObject();
+  //     // const instrument = UICtrl.getInstrument(settings.currentValues);
+  //     // UICtrl.setupNoteSection(instrument);
+  //     console.log(fretboardObj);
+  //     // console.log('isShownAllNotes: ', fretboardObj._isShownAllNotes);
+  //     if (fretboardObj._isShownAllNotes) return;
+  //     // if (true) return;
+  //     // console.log('continue!!', fretboardObj._isShownMultipleNotesNotes);
+  //     if (
+  //       !fretboardObj._isShownAllNotes &&
+  //       event.target.classList.contains('note-fret')
+  //     ) {
+  //       console.log('in');
+  //       let opacity = event.type === 'mouseover' ? 1 : 0;
+  //       fretboardObj._isShownMultipleNotesNotes
+  //         ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
+  //         : event.target.style.setProperty('--noteDotOpacity', opacity);
+  //     }
 
-      // if (
-      //   !fretboardObj._isShownAllNotes &&
-      //   event.target.classList.contains('note-fret')
-      // ) {
-      //   let opacity = event.type === 'mouseover' ? 1 : 0;
-      //   fretboardObj.isShownMultipleNotesNotes
-      //     ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
-      //     : event.target.style.setProperty('--noteDotOpacity', opacity);
-      // }
-    };
+  //     // if (
+  //     //   !fretboardObj._isShownAllNotes &&
+  //     //   event.target.classList.contains('note-fret')
+  //     // ) {
+  //     //   let opacity = event.type === 'mouseover' ? 1 : 0;
+  //     //   fretboardObj.isShownMultipleNotesNotes
+  //     //     ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
+  //     //     : event.target.style.setProperty('--noteDotOpacity', opacity);
+  //     // }
+  //   };
 
-    fretboardObj.addEventListenerOn(
-      fretboardObj.uiSelector,
-      'mouseover',
-      setNoteDot
-    );
-    fretboardObj.addEventListenerOn(
-      fretboardObj.uiSelector,
-      'mouseout',
-      setNoteDot
-    );
-  };
+  //   fretboardObj.addEventListenerOn(
+  //     fretboardObj.uiSelector,
+  //     'mouseover',
+  //     setNoteDot
+  //   );
+  //   fretboardObj.addEventListenerOn(
+  //     fretboardObj.uiSelector,
+  //     'mouseout',
+  //     setNoteDot
+  //   );
+  // };
   //public methods
   return {
-    createFretboardObject: (
-      fretboardSelector,
-      chosenAccidental,
-      definedNumberOfFrets,
-      numberOfStrings,
-      isShownAllNotes,
-      isShownMultipleNotesNotes,
-      instrumentTuning
-    ) => {
-      return createFretboardObject(
+    getInstrumentsNames: () => {
+      return Object.keys(instrumentTuningPreset);
+    },
+    instantiateFretboardObject: (fretboardSelector, settingsCurrentValues) => {
+      return instantiateFretboardObject(
         fretboardSelector,
-        chosenAccidental,
-        definedNumberOfFrets,
-        numberOfStrings,
-        isShownAllNotes,
-        isShownMultipleNotesNotes,
-        instrumentTuning
+        settingsCurrentValues
       );
     },
+    // createFretboardObject: (
+    //   fretboardSelector,
+    //   chosenAccidental,
+    //   definedNumberOfFrets,
+    //   numberOfStrings,
+    //   isShownAllNotes,
+    //   isShownMultipleNotesNotes,
+    //   instrumentTuning
+    // ) => {
+    //   return createFretboardObject(
+    //     fretboardSelector,
+    //     chosenAccidental,
+    //     definedNumberOfFrets,
+    //     numberOfStrings,
+    //     isShownAllNotes,
+    //     isShownMultipleNotesNotes,
+    //     instrumentTuning
+    //   );
+    // },
     buildFretboard: (fretboardObj) => {
       buildFretboard(fretboardObj);
     },
+
     // buildFretboard: function (uiSelector, numberOfStrings, numberOfFrets) {
     //   buildFretboard(uiSelector, numberOfStrings, numberOfFrets);
     // },

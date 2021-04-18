@@ -4,7 +4,8 @@ import RadioButtons from '../classes/radio-buttons';
 import NumberInput from '../classes/number-input';
 import Checkbox from '../classes/checkbox';
 import { InstrumentCtrl } from './InstrumentCtrl';
-import { UICtrl } from './UICtrl';
+import { FretboardCtrl } from './FretboardCtrl';
+import { UICtrl } from './UICtrl3';
 
 const SettingsBarCtrl = (function () {
   const createSettingsBarObjects = (uiSelectors) => {
@@ -18,7 +19,8 @@ const SettingsBarCtrl = (function () {
 
     const selectedInstrument = new Dropdown();
     selectedInstrument.uiSelector = instrumentSelector;
-    selectedInstrument.options = InstrumentCtrl.getInstrumentsNames();
+    // selectedInstrument.options = InstrumentCtrl.getInstrumentsNames();
+    selectedInstrument.options = FretboardCtrl.getInstrumentsNames();
     selectedInstrument.setupOptions();
     const accidental = new RadioButtons();
     accidental.uiSelector = accidentalSelector;
@@ -67,9 +69,14 @@ const SettingsBarCtrl = (function () {
     // console.log(settingsBar);
     const setSelectedInstrument = () => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
+      const fretboard = UICtrl.instantiateFretboardObject(
+        settingsBar.currentValues
+      );
+      UICtrl.buildFretboard(fretboard);
+
       // UICtrl.getInstrument(settingsBar.currentValues);
-      console.log('Hi SelectedInstrument: ', settingsBar);
-      console.log('Hi currentValues: ', settingsBar.currentValues);
+      // console.log('Hi SelectedInstrument: ', settingsBar);
+      // console.log('Hi currentValues: ', settingsBar.currentValues);
     };
 
     settingsBar.instrumentDropdown.addEventListenerOn(
@@ -82,8 +89,12 @@ const SettingsBarCtrl = (function () {
   const setAccidentalsEventListener = (settingsBar) => {
     const setAccidentals = (event) => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
-      console.log('Hi Accidentals: ', settingsBar);
-      console.log('Hi currentValues: ', settingsBar.currentValues);
+      const fretboard = UICtrl.instantiateFretboardObject(
+        settingsBar.currentValues
+      );
+      UICtrl.buildFretboard(fretboard);
+      // console.log('Hi Accidentals: ', settingsBar);
+      // console.log('Hi currentValues: ', settingsBar.currentValues);
       //     if (event.target.classList.contains('acc-select')) {
       //       const instrument = UICtrl.getInstrument(settingsBar.currentValues);
       //       UICtrl.setupNoteSection(instrument);
@@ -102,8 +113,13 @@ const SettingsBarCtrl = (function () {
   const setNumberOfFretsEventListener = (settingsBar) => {
     const setNumberOfFrets = () => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
-      console.log('Hi NumberOfFrets: ', settingsBar);
-      console.log('Hi currentValues: ', settingsBar.currentValues);
+      const fretboard = UICtrl.instantiateFretboardObject(
+        settingsBar.currentValues
+      );
+      UICtrl.buildFretboard(fretboard);
+      // UICtrl.init();
+      // console.log('Hi NumberOfFrets: ', settingsBar);
+      // console.log('Hi currentValues: ', settingsBar.currentValues);
       //     UICtrl.getInstrument(settingsBar.currentValues);
     };
 
@@ -117,8 +133,12 @@ const SettingsBarCtrl = (function () {
   const setShowAllNotesEventListener = (settingsBar) => {
     const setShowAllNotes = () => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
-      console.log('Hi ShowAllNotes: ', settingsBar);
-      console.log('Hi currentValues: ', settingsBar.currentValues);
+      const fretboard = UICtrl.instantiateFretboardObject(
+        settingsBar.currentValues
+      );
+      UICtrl.buildFretboard(fretboard);
+      // console.log('Hi ShowAllNotes: ', settingsBar);
+      // console.log('Hi currentValues: ', settingsBar.currentValues);
       //     console.log('settingsBar.currentValues: ', settingsBar.currentValues);
       //     const isShownAllNotes = settingsBar.currentValues.isShownAllNotes;
       //     console.log(
@@ -148,8 +168,12 @@ const SettingsBarCtrl = (function () {
   const setShowMultipleNotesEventListener = (settingsBar) => {
     const setShowMultipleNotes = () => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
-      console.log('Hi ShowMultipleNotes: ', settingsBar);
-      console.log('Hi currentValues: ', settingsBar.currentValues);
+      const fretboard = UICtrl.instantiateFretboardObject(
+        settingsBar.currentValues
+      );
+      UICtrl.buildFretboard(fretboard);
+      // console.log('Hi ShowMultipleNotes: ', settingsBar);
+      // console.log('Hi currentValues: ', settingsBar.currentValues);
     };
 
     settingsBar.showMultipleNotesCheckbox.addEventListenerOn(
