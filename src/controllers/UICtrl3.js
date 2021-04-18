@@ -1,4 +1,5 @@
 import { SettingsBarCtrl } from './SettingsBarCtrl';
+import UI from '../classes/ui';
 
 const UICtrl = (function () {
   const UISelectors = {
@@ -22,12 +23,21 @@ const UICtrl = (function () {
   // }
 
   // Load UI components
-  const loadUIComponents = function () {
+  const loadUI = (settingsBar, fretboard, notesSection) => {
     console.log('Hello!!');
+    const ui = new UI();
+    ui.settingsBar = settingsBar;
+    // ui.fretboard = fretboard;
+    // ui.notesSection = notesSection;
+    console.log('UI: ', ui);
   };
 
   const instantiateSettingBarObj = () => {
     return SettingsBarCtrl.instantiateSettingBarObj(UISelectors.settingsBar);
+  };
+
+  const setSettingsBarEventListeners = (settingsBarObj) => {
+    return SettingsBarCtrl.setSettingsBarEventListeners(settingsBarObj);
   };
 
   // const getSettingBarObject = () =>
@@ -51,8 +61,10 @@ const UICtrl = (function () {
   //public methods
   return {
     init: function () {
-      loadUIComponents();
-      instantiateSettingBarObj();
+      const settingsBar = instantiateSettingBarObj();
+      loadUI(settingsBar);
+      setSettingsBarEventListeners(settingsBar);
+
       // const settings = getSettingBarObject();
       // const instrument = getInstrument(settings.currentValues);
       // setupNoteSection(instrument);
