@@ -55,6 +55,9 @@ const UICtrl = (function () {
   const buildFretboard = (fretboard) => {
     FretboardCtrl.buildFretboard(fretboard);
   };
+  const setFretboardEventListeners = (fretboard, settingsBar) => {
+    FretboardCtrl.setFretboardEventListeners(fretboard, settingsBar);
+  };
   // const getInstrument = (instrumentSettings) => {
   //   return InstrumentCtrl.createInstrumentObject(
   //     // UISelectors.instrument,
@@ -78,6 +81,7 @@ const UICtrl = (function () {
       buildFretboard(fretboard);
       // loadUI(settingsBar, fretboard, 'blb');
       setSettingsBarEventListeners(settingsBar);
+      setFretboardEventListeners(fretboard, settingsBar);
 
       // const settings = getSettingBarObject();
       // const instrument = getInstrument(settings.currentValues);
@@ -88,6 +92,9 @@ const UICtrl = (function () {
     },
     buildFretboard: (fretboard) => {
       buildFretboard(fretboard);
+    },
+    setFretboardEventListeners: (fretboard) => {
+      setFretboardEventListeners(fretboard);
     },
     // getSettingBarObject: () => {
     //   return getSettingBarObject();

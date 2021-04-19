@@ -163,52 +163,57 @@ const FretboardCtrl = (function () {
       }
     }
 
-    //   setFretboardEventListeners(fretboardObj);
+    // setFretboardEventListeners(fretboardObj);
   };
 
-  // const setFretboardEventListeners = (fretboardObj) => {
-  //   const setNoteDot = (event) => {
-  //     // const settings = UICtrl.getSettingBarObject();
-  //     // const instrument = UICtrl.getInstrument(settings.currentValues);
-  //     // UICtrl.setupNoteSection(instrument);
-  //     console.log(fretboardObj);
-  //     // console.log('isShownAllNotes: ', fretboardObj._isShownAllNotes);
-  //     if (fretboardObj._isShownAllNotes) return;
-  //     // if (true) return;
-  //     // console.log('continue!!', fretboardObj._isShownMultipleNotesNotes);
-  //     if (
-  //       !fretboardObj._isShownAllNotes &&
-  //       event.target.classList.contains('note-fret')
-  //     ) {
-  //       console.log('in');
-  //       let opacity = event.type === 'mouseover' ? 1 : 0;
-  //       fretboardObj._isShownMultipleNotesNotes
-  //         ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
-  //         : event.target.style.setProperty('--noteDotOpacity', opacity);
-  //     }
+  const setFretboardEventListeners = (fretboardObj, settingsBarObj) => {
+    const setNoteDot = (event) => {
+      // const settings = UICtrl.getSettingBarObject();
+      // const instrument = UICtrl.getInstrument(settings.currentValues);
+      // UICtrl.setupNoteSection(instrument);
+      // console.log(fretboardObj);
+      const isShownAllNotes = settingsBarObj.currentValues.isShownAllNotes;
+      const isShownMultipleNotesNotes =
+        settingsBarObj.currentValues.isShownMultipleNotesNotes;
+      console.log(
+        'settingsBarObj123: ',
+        settingsBarObj.currentValues.isShownMultipleNotesNotes
+      );
+      // console.log('isShownAllNotes@@: ', fretboardObj);
+      // console.log('isShownAllNotes: ', fretboardObj._isShownAllNotes);
+      // if (fretboardObj._isShownAllNotes) return;
+      if (isShownAllNotes) return;
+      // console.log('continue!!', fretboardObj._isShownMultipleNotesNotes);
+      if (event.target.classList.contains('note-fret')) {
+        // console.log('in');
+        let opacity = event.type === 'mouseover' ? 1 : 0;
+        isShownMultipleNotesNotes
+          ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
+          : event.target.style.setProperty('--noteDotOpacity', opacity);
+      }
 
-  //     // if (
-  //     //   !fretboardObj._isShownAllNotes &&
-  //     //   event.target.classList.contains('note-fret')
-  //     // ) {
-  //     //   let opacity = event.type === 'mouseover' ? 1 : 0;
-  //     //   fretboardObj.isShownMultipleNotesNotes
-  //     //     ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
-  //     //     : event.target.style.setProperty('--noteDotOpacity', opacity);
-  //     // }
-  //   };
+      // if (
+      //   !fretboardObj._isShownAllNotes &&
+      //   event.target.classList.contains('note-fret')
+      // ) {
+      //   let opacity = event.type === 'mouseover' ? 1 : 0;
+      //   fretboardObj.isShownMultipleNotesNotes
+      //     ? fretboardObj.toggleMultipleNotes(event.target.dataset.note, opacity)
+      //     : event.target.style.setProperty('--noteDotOpacity', opacity);
+      // }
+    };
 
-  //   fretboardObj.addEventListenerOn(
-  //     fretboardObj.uiSelector,
-  //     'mouseover',
-  //     setNoteDot
-  //   );
-  //   fretboardObj.addEventListenerOn(
-  //     fretboardObj.uiSelector,
-  //     'mouseout',
-  //     setNoteDot
-  //   );
-  // };
+    fretboardObj.addEventListenerOn(
+      fretboardObj.uiSelector,
+      'mouseover',
+      setNoteDot
+    );
+    fretboardObj.addEventListenerOn(
+      fretboardObj.uiSelector,
+      'mouseout',
+      setNoteDot
+    );
+  };
   //public methods
   return {
     getInstrumentsNames: () => {
@@ -241,6 +246,9 @@ const FretboardCtrl = (function () {
     // },
     buildFretboard: (fretboardObj) => {
       buildFretboard(fretboardObj);
+    },
+    setFretboardEventListeners: (fretboardObj, settingsBarObj) => {
+      setFretboardEventListeners(fretboardObj, settingsBarObj);
     },
 
     // buildFretboard: function (uiSelector, numberOfStrings, numberOfFrets) {

@@ -137,26 +137,30 @@ const SettingsBarCtrl = (function () {
         settingsBar.currentValues
       );
       UICtrl.buildFretboard(fretboard);
+      // UICtrl.setFretboardEventListeners(fretboard);
       // console.log('Hi ShowAllNotes: ', settingsBar);
       // console.log('Hi currentValues: ', settingsBar.currentValues);
-      //     console.log('settingsBar.currentValues: ', settingsBar.currentValues);
-      //     const isShownAllNotes = settingsBar.currentValues.isShownAllNotes;
-      //     console.log(
-      //       'UICtrl.getInstrument: ',
-      //       UICtrl.getInstrument(settingsBar.currentValues)
-      //     );
-      //     UICtrl.getInstrument(settingsBar.currentValues);
-      //     const root = document.documentElement;
-      //     // console.log(showAllNotes);
-      //     if (isShownAllNotes) {
-      //       root.style.setProperty('--noteDotOpacity', 1);
-      //       // UICtrl.getInstrument(settingsBar.currentValues);
-      //       // this.instrument.fretboard.setupFretboard();
-      //     } else {
-      //       root.style.setProperty('--noteDotOpacity', 0);
-      //       // UICtrl.getInstrument(settingsBar.currentValues);
-      //       // this.instrument.fretboard.setupFretboard();
-      //     }
+      console.log(
+        'settingsBar.currentValues.isShownAllNotes: ',
+        settingsBar.currentValues.isShownAllNotes
+      );
+      const isShownAllNotes = settingsBar.currentValues.isShownAllNotes;
+      // console.log(
+      //   'UICtrl.getInstrument: ',
+      //   UICtrl.getInstrument(settingsBar.currentValues)
+      // );
+      // UICtrl.getInstrument(settingsBar.currentValues);
+      const root = document.documentElement;
+      // console.log(showAllNotes);
+      if (isShownAllNotes) {
+        root.style.setProperty('--noteDotOpacity', 1);
+        // UICtrl.getInstrument(settingsBar.currentValues);
+        // this.instrument.fretboard.setupFretboard();
+      } else {
+        root.style.setProperty('--noteDotOpacity', 0);
+        // UICtrl.getInstrument(settingsBar.currentValues);
+        // this.instrument.fretboard.setupFretboard();
+      }
     };
 
     settingsBar.showAllNotesCheckbox.addEventListenerOn(
