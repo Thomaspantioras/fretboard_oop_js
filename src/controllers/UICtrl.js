@@ -1,5 +1,5 @@
-import { InstrumentCtrl } from './InstrumentCtrl';
 import { SettingsBarCtrl } from './SettingsBarCtrl';
+import { FretboardCtrl } from './FretboardCtrl';
 import { NotesSectionCtrl } from './NotesSectionCtrl';
 
 const UICtrl = (function () {
@@ -11,78 +11,74 @@ const UICtrl = (function () {
       showAllNotesSelector: '#show-all-notes',
       showMultipleNotesSelector: '#show-multiple-notes',
     },
-    instrument: {
-      fretboardSelector: '#fretboard',
-      // string: "string",
-    },
-    noteNameSection: '.note-name-section',
+    fretboardSelector: '#fretboard',
+    noteNameSectionSelector: '.note-name-section',
   };
 
-  // const addEventListenerCallbacks = {
+  const instantiateSettingBarObj = () => {
+    return SettingsBarCtrl.instantiateSettingBarObj(UISelectors.settingsBar);
+  };
 
-  // }
+  const setSettingsBarEventListeners = (settingsBarObj) => {
+    return SettingsBarCtrl.setSettingsBarEventListeners(settingsBarObj);
+  };
 
-  const getSettingBarObject = () =>
-    SettingsBarCtrl.getSettingBarObject(UISelectors.settingsBar);
-
-  const getInstrument = (instrumentSettings) => {
-    // const instrumentSettings = getSettingBarObject().currentValues;
-    // console.log('instrumentSettings: ', instrumentSettings);
-    return InstrumentCtrl.createInstrumentObject(
-      UISelectors.instrument,
-      instrumentSettings
+  const instantiateFretboardObject = (currentValues) => {
+    return FretboardCtrl.instantiateFretboardObject(
+      UISelectors.fretboardSelector,
+      currentValues
     );
   };
 
-  const setupNoteSection = (instrument) => {
-    NotesSectionCtrl.setupNoteSection(instrument, UISelectors.noteNameSection);
+  const buildFretboard = (fretboard) => {
+    FretboardCtrl.buildFretboard(fretboard);
   };
-  // const setupNoteSection = (notes) => {
-  //   NotesSectionCtrl.setupNoteSection(notes, UISelectors.noteNameSection);
-  // };
+  const setFretboardEventListeners = (fretboard, settingsBar) => {
+    FretboardCtrl.setFretboardEventListeners(fretboard, settingsBar);
+  };
 
-  // const instantiateInstrument = () => {
-  //   console.log('Hi!!: ', SettingsBarCtrl);
-  // };
-  // const instantiateAndGetMenu = function (settings) {
-  //   return SettingsBarCtrl.instantiateAndGetMenu(settings);
-  // };
+  const setupNoteSection = (notes) => {
+    return NotesSectionCtrl.setupNoteSection(
+      notes,
+      UISelectors.noteNameSectionSelector
+    );
+  };
 
-  // //get the settingsBar elements and add event listeners
-  // const loadMenuEventListeners = function () {};
+  const setNameSectionEventListeners = (
+    notesSection,
+    settingsBarObj,
+    fretboardObj
+  ) => {
+    NotesSectionCtrl.setNameSectionEventListeners(
+      notesSection,
+      settingsBarObj,
+      fretboardObj
+    );
+  };
 
   //public methods
   return {
-    // createSettingsBar: function () {
-    //   createSettingsBar(
-    //     UISelectors.settingsBar.instrument,
-    //     UISelectors.settingsBar.accidental,
-    //     UISelectors.settingsBar.numberOfFrets,
-    //     UISelectors.settingsBar.showAllNotes,
-    //     UISelectors.settingsBar.showMultipleNotes
-    //   );
-    // },
-    getSettingBarObject: () => {
-      return getSettingBarObject();
+    init: function () {
+      const settingsBar = instantiateSettingBarObj();
+      const fretboard = instantiateFretboardObject(settingsBar.currentValues);
+      buildFretboard(fretboard);
+      const notesSection = setupNoteSection(fretboard.notes);
+      setSettingsBarEventListeners(settingsBar);
+      setFretboardEventListeners(fretboard, settingsBar);
+      setNameSectionEventListeners(notesSection, settingsBar, fretboard);
     },
-    getInstrument: (instrumentSettings) => {
-      return getInstrument(instrumentSettings);
+    instantiateFretboardObject: (currentValues) => {
+      return instantiateFretboardObject(currentValues);
     },
-    setupNoteSection: (instrument) => {
-      return setupNoteSection(instrument);
+    buildFretboard: (fretboard) => {
+      buildFretboard(fretboard);
     },
-    // setupNoteSection: (notes) => {
-    //   return setupNoteSection(notes);
-    // },
-    // instantiateInstrument: () => {
-    //   instantiateInstrument();
-    // },
-    // getSettingsBarSelectors: function () {
-    //   return UISelectors.settingsBar;
-    // },
-    // setupFretboard: function () {
-    //   FretboardCtrl.setupFretboard(UISelectors.fretboard);
-    // },
+    setFretboardEventListeners: (fretboard) => {
+      setFretboardEventListeners(fretboard);
+    },
+    setupNoteSection: (notes) => {
+      return setupNoteSection(notes);
+    },
   };
 })();
 

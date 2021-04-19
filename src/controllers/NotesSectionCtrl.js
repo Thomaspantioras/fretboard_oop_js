@@ -1,30 +1,32 @@
 import Element from '../classes/html-element';
 
 const NotesSectionCtrl = (function () {
-  const setupNoteSection = (instrument, uiSelector) => {
+  const setupNoteSection = (notes, uiSelector) => {
     const notesSection = new Element();
     notesSection.uiSelector = uiSelector;
     notesSection.getElementByUiSelector(notesSection.uiSelector).innerHTML = '';
 
-    instrument.fretboard.notes.forEach((note) => {
+    notes.forEach((note) => {
       let noteNameElement = notesSection.createChildElement('span', note);
       notesSection
         .getElementByUiSelector(notesSection.uiSelector)
         .appendChild(noteNameElement);
     });
 
-    setNameSectionEventListeners(notesSection, instrument);
+    return notesSection;
   };
 
-  const setNameSectionEventListeners = (notesSection, instrument) => {
+  const setNameSectionEventListeners = (
+    notesSection,
+    settingsBarObj,
+    fretboardObj
+  ) => {
     const setNotesFromNameNoteSection = (event) => {
-      // let showAllNotes = UI.showAllNotesSelector.isChecked();
-      let isShownAllNotes = instrument.currentSettings.isShownAllNotes;
-      // console.log(isShownAllNotes);
+      const isShownAllNotes = settingsBarObj.currentValues.isShownAllNotes;
       if (!isShownAllNotes) {
         let note = event.target.innerText;
         let opacity = event.type === 'mouseover' ? 1 : 0;
-        instrument.fretboard.toggleMultipleNotes(note, opacity);
+        fretboardObj.toggleMultipleNotes(note, opacity);
       } else {
         return;
       }
@@ -46,6 +48,17 @@ const NotesSectionCtrl = (function () {
   return {
     setupNoteSection: (notes, uiSelector) => {
       return setupNoteSection(notes, uiSelector);
+    },
+    setNameSectionEventListeners: (
+      notesSection,
+      settingsBarObj,
+      fretboardObj
+    ) => {
+      return setNameSectionEventListeners(
+        notesSection,
+        settingsBarObj,
+        fretboardObj
+      );
     },
   };
 })();

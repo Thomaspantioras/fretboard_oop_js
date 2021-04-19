@@ -3,9 +3,8 @@ import Dropdown from '../classes/dropdown';
 import RadioButtons from '../classes/radio-buttons';
 import NumberInput from '../classes/number-input';
 import Checkbox from '../classes/checkbox';
-import { InstrumentCtrl } from './InstrumentCtrl';
 import { FretboardCtrl } from './FretboardCtrl';
-import { UICtrl } from './UICtrl3';
+import { UICtrl } from './UICtrl';
 
 const SettingsBarCtrl = (function () {
   const createSettingsBarObjects = (uiSelectors) => {
@@ -66,17 +65,12 @@ const SettingsBarCtrl = (function () {
   };
 
   const setSelectedInstrumentEventListener = (settingsBar) => {
-    // console.log(settingsBar);
     const setSelectedInstrument = () => {
       settingsBar.currentValues = settingsBar.getSettingsValues();
       const fretboard = UICtrl.instantiateFretboardObject(
         settingsBar.currentValues
       );
       UICtrl.buildFretboard(fretboard);
-
-      // UICtrl.getInstrument(settingsBar.currentValues);
-      // console.log('Hi SelectedInstrument: ', settingsBar);
-      // console.log('Hi currentValues: ', settingsBar.currentValues);
     };
 
     settingsBar.instrumentDropdown.addEventListenerOn(
@@ -93,14 +87,7 @@ const SettingsBarCtrl = (function () {
         settingsBar.currentValues
       );
       UICtrl.buildFretboard(fretboard);
-      // console.log('Hi Accidentals: ', settingsBar);
-      // console.log('Hi currentValues: ', settingsBar.currentValues);
-      //     if (event.target.classList.contains('acc-select')) {
-      //       const instrument = UICtrl.getInstrument(settingsBar.currentValues);
-      //       UICtrl.setupNoteSection(instrument);
-      //     } else {
-      //       return;
-      // }
+      UICtrl.setupNoteSection(fretboard.notes);
     };
 
     settingsBar.accidentalRadioButtons.addEventListenerOn(
@@ -117,10 +104,6 @@ const SettingsBarCtrl = (function () {
         settingsBar.currentValues
       );
       UICtrl.buildFretboard(fretboard);
-      // UICtrl.init();
-      // console.log('Hi NumberOfFrets: ', settingsBar);
-      // console.log('Hi currentValues: ', settingsBar.currentValues);
-      //     UICtrl.getInstrument(settingsBar.currentValues);
     };
 
     settingsBar.numberOfFretsInput.addEventListenerOn(
@@ -137,29 +120,12 @@ const SettingsBarCtrl = (function () {
         settingsBar.currentValues
       );
       UICtrl.buildFretboard(fretboard);
-      // UICtrl.setFretboardEventListeners(fretboard);
-      // console.log('Hi ShowAllNotes: ', settingsBar);
-      // console.log('Hi currentValues: ', settingsBar.currentValues);
-      console.log(
-        'settingsBar.currentValues.isShownAllNotes: ',
-        settingsBar.currentValues.isShownAllNotes
-      );
       const isShownAllNotes = settingsBar.currentValues.isShownAllNotes;
-      // console.log(
-      //   'UICtrl.getInstrument: ',
-      //   UICtrl.getInstrument(settingsBar.currentValues)
-      // );
-      // UICtrl.getInstrument(settingsBar.currentValues);
       const root = document.documentElement;
-      // console.log(showAllNotes);
       if (isShownAllNotes) {
         root.style.setProperty('--noteDotOpacity', 1);
-        // UICtrl.getInstrument(settingsBar.currentValues);
-        // this.instrument.fretboard.setupFretboard();
       } else {
         root.style.setProperty('--noteDotOpacity', 0);
-        // UICtrl.getInstrument(settingsBar.currentValues);
-        // this.instrument.fretboard.setupFretboard();
       }
     };
 
@@ -176,8 +142,6 @@ const SettingsBarCtrl = (function () {
         settingsBar.currentValues
       );
       UICtrl.buildFretboard(fretboard);
-      // console.log('Hi ShowMultipleNotes: ', settingsBar);
-      // console.log('Hi currentValues: ', settingsBar.currentValues);
     };
 
     settingsBar.showMultipleNotesCheckbox.addEventListenerOn(
@@ -202,9 +166,6 @@ const SettingsBarCtrl = (function () {
     setSettingsBarEventListeners: (settingsBarObj) => {
       return setSettingsBarEventListeners(settingsBarObj);
     },
-    // getSettingBarObject: (selectors) => {
-    //   return getSettingBarObject(selectors);
-    // },
   };
 })();
 

@@ -1,4 +1,4 @@
-import { AppCtrl } from './controllers/AppCtrl.js';
+import { UICtrl } from './controllers/UICtrl';
 
 // Initialize App
-AppCtrl.init();
+UICtrl.init();

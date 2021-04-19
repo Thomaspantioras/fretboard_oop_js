@@ -23,13 +23,7 @@ export default class Element {
     return element;
   }
 
-  // getElement() {
-  //   return this._uiSelector ? getElementByUiSelector(this._uiSelector) : null;
-  // }
   getValue(uiSelector) {
-    // return this.getElementByUiSelector(uiSelector).hasAttribute('value')
-    //   ? this.getElementByUiSelector(uiSelector).value
-    //   : event.target.value; // this does not work for the dropdown
     return this.getElementByUiSelector(uiSelector).value; // this does not work for the dropdown
   }
 

@@ -1,7 +1,5 @@
 import Element from './html-element';
 export default class Fretboard extends Element {
-  // static singleFretMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
-  // static doubleFretMarkPositions = [12, 24];
   constructor() {
     super();
     this.singleFretMarkPositions = [3, 5, 7, 9, 15, 17, 19, 21];
@@ -13,7 +11,6 @@ export default class Fretboard extends Element {
     this._notes = [];
     this._isShownAllNotes = '';
     this._isShownMultipleNotesNotes = '';
-    // this._accidentals = '';
   }
   get numberOfStrings() {
     if (this._numberOfStrings) return this._numberOfStrings;
