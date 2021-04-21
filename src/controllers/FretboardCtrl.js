@@ -111,7 +111,10 @@ const FretboardCtrl = (function () {
       fretboardObj.uiSelector
     );
     for (let i = 0; i < fretboardObj.numberOfStrings; i++) {
-      let string = createStringElement(`string${i}`);
+      // let string = createStringElement(`string${i}`);
+      let string = createStringElement(`string`);
+
+      string.style.setProperty('--string-height', `${4 + i}`);
       fretboardHtmlElement.appendChild(string);
 
       for (let fret = 0; fret <= fretboardObj.numberOfFrets; fret++) {
