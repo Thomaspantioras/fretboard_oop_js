@@ -105,6 +105,7 @@ const FretboardCtrl = (function () {
   };
 
   const buildFretboard = (fretboardObj) => {
+    const fretWidth = calculateFretWidths(100, fretboardObj.numberOfFrets);
     setCssRootVariable('--number-of-strings', fretboardObj.numberOfStrings);
     const fretboardHtmlElement = getEmptyFretboardHtmlElement(
       fretboardObj.uiSelector
@@ -112,11 +113,16 @@ const FretboardCtrl = (function () {
     for (let i = 0; i < fretboardObj.numberOfStrings; i++) {
       let string = createStringElement(`string${i}`);
       fretboardHtmlElement.appendChild(string);
+
       for (let fret = 0; fret <= fretboardObj.numberOfFrets; fret++) {
         // let noteFret = createFretElement('note-fret');
         const fretObj = createFretObject('note-fret');
         const noteFret = fretObj.createFretTemplate();
-        noteFret.style.setProperty('--note-fret-width', `${100 - fret * 3}px`);
+
+        noteFret.style.setProperty(
+          '--note-fret-width',
+          `${fretWidth[fret - 1]}vw`
+        );
         string.appendChild(noteFret);
         if (i === 0) addFretMark(fret, fretObj, noteFret);
 
@@ -151,6 +157,27 @@ const FretboardCtrl = (function () {
       'mouseout',
       setNoteDot
     );
+  };
+
+  const calculateFretWidths = (fretboardWidth, numberOfFrets) => {
+    // const fretboardWidth = 100;
+    const balancedWidth = fretboardWidth / numberOfFrets;
+    const percentage = 0.25;
+    const factor = percentage * balancedWidth;
+    let fretWidths = [];
+
+    for (let j = numberOfFrets; j > 0; j--) {
+      if (j == numberOfFrets) fretWidths.unshift(balancedWidth - factor);
+
+      if (j < numberOfFrets)
+        fretWidths.unshift(fretWidths[numberOfFrets - j - 1] + factor / j);
+
+      // if (j == 1) {
+      //   // fretWidths.unshift(fretWidths[numberOfFrets - j - 1] + 2 * factor);
+      //   fretWidths.unshift(fretWidths[numberOfFrets - j - 1] + factor);
+      // }
+    }
+    return fretWidths;
   };
   //public methods
   return {
