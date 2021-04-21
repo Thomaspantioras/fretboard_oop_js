@@ -7,6 +7,6 @@ export default class RadioButtons extends Element {
 
   /*override*/
   getValue() {
-    return document.querySelector('input[name="accidentals"]:checked').value; // this does not work for the dropdown
+    return document.querySelector('input[name="accidentals"]:checked').value;
   }
 }

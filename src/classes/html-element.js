@@ -24,7 +24,7 @@ export default class Element {
   }
 
   getValue(uiSelector) {
-    return this.getElementByUiSelector(uiSelector).value; // this does not work for the dropdown
+    return this.getElementByUiSelector(uiSelector).value;
   }
 
   addEventListenerOn(uiSelector, typeOfEvent, callFunction) {

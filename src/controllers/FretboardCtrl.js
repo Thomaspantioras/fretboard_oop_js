@@ -111,14 +111,11 @@ const FretboardCtrl = (function () {
       fretboardObj.uiSelector
     );
     for (let i = 0; i < fretboardObj.numberOfStrings; i++) {
-      // let string = createStringElement(`string${i}`);
       let string = createStringElement(`string`);
-
       string.style.setProperty('--string-height', `${4 + i}`);
       fretboardHtmlElement.appendChild(string);
 
       for (let fret = 0; fret <= fretboardObj.numberOfFrets; fret++) {
-        // let noteFret = createFretElement('note-fret');
         const fretObj = createFretObject('note-fret');
         const noteFret = fretObj.createFretTemplate();
 
@@ -163,7 +160,6 @@ const FretboardCtrl = (function () {
   };
 
   const calculateFretWidths = (fretboardWidth, numberOfFrets) => {
-    // const fretboardWidth = 100;
     const balancedWidth = fretboardWidth / numberOfFrets;
     const percentage = 0.25;
     const factor = percentage * balancedWidth;
@@ -182,6 +178,7 @@ const FretboardCtrl = (function () {
     }
     return fretWidths;
   };
+
   //public methods
   return {
     getInstrumentsNames: () => {
